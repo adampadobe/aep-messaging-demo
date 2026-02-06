@@ -1,0 +1,43 @@
+/*
+ Copyright 2021 Adobe. All rights reserved.
+ This file is licensed to you under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License. You may obtain a copy
+ of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software distributed under
+ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+ OF ANY KIND, either express or implied. See the License for the specific language
+ governing permissions and limitations under the License.
+ */
+
+import AEPCore
+import AEPServices
+import Foundation
+
+/// Wrapper class around `LaunchRulesEngine` that provides a different implementation for loading rules
+class MessagingRulesEngine {
+    let launchRulesEngine: LaunchRulesEngine
+    let runtime: ExtensionRuntime
+    let cache: Cache
+
+    /// Initialize this class, creating a new rules engine with the provided name and runtime
+    init(name: String, extensionRuntime: ExtensionRuntime, cache: Cache) {
+        runtime = extensionRuntime
+        launchRulesEngine = LaunchRulesEngine(name: name, extensionRuntime: extensionRuntime)
+        self.cache = cache
+    }
+
+    /// INTERNAL ONLY
+    /// Initializer to provide a mock rules engine for testing
+    init(extensionRuntime: ExtensionRuntime, launchRulesEngine: LaunchRulesEngine, cache: Cache) {
+        runtime = extensionRuntime
+        self.launchRulesEngine = launchRulesEngine
+        self.cache = cache
+    }
+
+    /// if we have rules loaded, then we simply process the event.
+    /// if rules are not yet loaded, add the event to the waitingEvents array to
+    func process(event: Event) {
+        _ = launchRulesEngine.process(event: event)
+    }
+}
