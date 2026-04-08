@@ -19,8 +19,8 @@ import AEPMessagingLiveActivity
 
 struct AirplaneLiveActivity: Widget {
     // Hard-coded flight info for demo
-    let flightNumber = "HZ1234"
-    let airlineName = "Adobe Air"
+    let flightNumber = "EY451"
+    let airlineName = "Etihad Airways"
     let scheduledDepartureTime = "11:02 AM"
     let scheduledArrivalTime = "4:55 PM"
     
@@ -167,8 +167,8 @@ struct AirplaneTrackingLiveActivityView: View {
         }
         .padding()
         .foregroundColor(.white)
-        // Background color changes to green once journey completes
-        .background(context.state.journeyProgress < 100 ? Color.blue : Color.green)
+        // Etihad Airways brand colors: Gold (#C4921B) in progress, Dark Brown (#251019) when landed
+        .background(context.state.journeyProgress < 100 ? Color(red: 0.769, green: 0.573, blue: 0.106) : Color(red: 0.145, green: 0.063, blue: 0.098))
         .cornerRadius(12)
     }
     

@@ -32,6 +32,9 @@ class TokenCollector: NSObject ,ObservableObject, Extension {
     static var gameScorePushToStartToken: String = ""
     static var foodDeliveryPushToStartToken: String = ""
     static var airplaneTrackingPushToStartToken: String = ""
+    static var etihadPremiumPushToStartToken: String = ""
+    static var etihadBoardingPushToStartToken: String = ""
+    static var ksiaAirportPushToStartToken: String = ""
 
     
     public required init?(runtime: ExtensionRuntime) {
@@ -83,6 +86,33 @@ class TokenCollector: NSObject ,ObservableObject, Extension {
                     DispatchQueue.main.async {
                         TokenCollector.foodDeliveryPushToStartToken = token
                         NSLog("Peaks LA : Updated FoodDelivery push-to-start token: \(token)")
+                    }
+                }
+                
+                // Extract EtihadPremium token
+                if let etihadToken = pushToStartTokens["EtihadPremiumFlightAttributes"] as? [String: Any],
+                   let token = etihadToken["token"] as? String {
+                    DispatchQueue.main.async {
+                        TokenCollector.etihadPremiumPushToStartToken = token
+                        NSLog("Peaks LA : Updated EtihadPremium push-to-start token: \(token)")
+                    }
+                }
+                
+                // Extract EtihadBoarding token
+                if let etihadBoardingToken = pushToStartTokens["EtihadBoardingAttributes"] as? [String: Any],
+                   let token = etihadBoardingToken["token"] as? String {
+                    DispatchQueue.main.async {
+                        TokenCollector.etihadBoardingPushToStartToken = token
+                        NSLog("Peaks LA : Updated EtihadBoarding push-to-start token: \(token)")
+                    }
+                }
+                
+                // Extract KSIA token
+                if let ksiaToken = pushToStartTokens["KSIAAirportAttributes"] as? [String: Any],
+                   let token = ksiaToken["token"] as? String {
+                    DispatchQueue.main.async {
+                        TokenCollector.ksiaAirportPushToStartToken = token
+                        NSLog("Peaks LA : Updated KSIA Airport push-to-start token: \(token)")
                     }
                 }
             }

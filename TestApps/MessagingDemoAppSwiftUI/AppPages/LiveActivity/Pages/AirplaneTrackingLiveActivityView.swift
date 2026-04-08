@@ -125,6 +125,9 @@ private extension AirplaneTrackingLiveActivityView {
                 SectionSubHeader(title: "iOS 16.1+")
             }
             SectionDescription(text: "Manually start an AirplaneTracking Live Activity from the app. After starting, a unique push token is generated. Use it to send push-based updates to this Live Activity.")
+            Text("How to get the token: Enter any ID (e.g. flight-001) → tap Start → find the token in the activity row below (copy with 📋). On simulator the token may be empty; use a real device for AEP.")
+                .font(.caption2)
+                .foregroundColor(.secondary)
             
             // Text field for liveActivityID
             TextField("Enter Live Activity ID", text: $liveActivityID)
@@ -330,9 +333,9 @@ private extension AirplaneTrackingLiveActivityView {
         // Example attribute + initial content state
         let attributes = AirplaneTrackingAttributes(
             liveActivityData: LiveActivityData(liveActivityID: trimmedLiveActivityID),
-            arrivalAirport: "SFO",
-            departureAirport: "MIA",
-            arrivalTerminal: "Terminal 2")
+            arrivalAirport: "LHR",
+            departureAirport: "AUH",
+            arrivalTerminal: "Terminal 5")
         let initialContentState = AirplaneTrackingAttributes.ContentState(journeyProgress: 0)
         
         do {
@@ -366,7 +369,7 @@ private extension AirplaneTrackingLiveActivityView {
          }
          
          // Example attribute + initial content state
-         let attributes = AirplaneTrackingAttributes(liveActivityData: LiveActivityData(channelID: trimmedChannelID), arrivalAirport: "SFO", departureAirport: "MIA", arrivalTerminal: "Terminal 2")
+         let attributes = AirplaneTrackingAttributes(liveActivityData: LiveActivityData(channelID: trimmedChannelID), arrivalAirport: "LHR", departureAirport: "AUH", arrivalTerminal: "Terminal 5")
          let initialContentState = AirplaneTrackingAttributes.ContentState(journeyProgress: 0)
          
          do {

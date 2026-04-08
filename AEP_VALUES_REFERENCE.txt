@@ -1,9 +1,9 @@
 # Copy these into AEP / Journey Optimizer when configuring the app
 
-Bundle ID (main app):     com.adobe.MessagingDemoAppSwiftUI
-Widget/Live Activity:     com.adobe.MessagingDemoAppSwiftUI.WidgetMessagingDemoAppSwiftUI
+Bundle ID (main app):     com.adampadobe.aep-messaging-demo
+Widget/Live Activity:     com.adampadobe.aep-messaging-demo.WidgetMessagingDemoAppSwiftUI
 
 You will get these from Apple Developer and upload/enter in AEP:
   Team ID:                 (developer.apple.com/account → Membership)
-  APNs Key ID:             (developer.apple.com/account → Keys → your APNs key)
-  .p8 file:                (downloaded when you create the APNs key — upload in AEP)
+  APNs Key ID:             8454YRLVZL
+  .p8 file:                AuthKey_8454YRLVZL.p8 (upload in AEP — keep a secure backup)

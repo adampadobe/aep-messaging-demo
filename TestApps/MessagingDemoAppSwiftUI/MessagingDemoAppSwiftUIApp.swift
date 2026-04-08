@@ -33,7 +33,10 @@ struct MessagingDemoAppSwiftUIApp: App {
                     MobileCore.lifecyclePause()
                 case .active:
                     print("Scene phase changed to active.")
-                    MobileCore.lifecycleStart(additionalContextData: nil)
+                    // Defer so first frame can render without blocking
+                    DispatchQueue.main.async {
+                        MobileCore.lifecycleStart(additionalContextData: nil)
+                    }
                 case .inactive:
                     print("Scene phase changed to inactive.")
                 @unknown default:

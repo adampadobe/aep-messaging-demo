@@ -34,10 +34,12 @@ struct HomeView: View {
                 .tabItem {
                     Label("Cards", systemImage: "tray.and.arrow.down.fill")
                 }
-            LiveActivityView()
-                .tabItem {
-                    Label("Live Activity", systemImage: "app.badge")
-                }
+            if #available(iOS 16.1, *) {
+                LiveActivityView()
+                    .tabItem {
+                        Label("Live Activity", systemImage: "app.badge")
+                    }
+            }
         }
     }
 }

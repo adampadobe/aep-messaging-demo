@@ -15,15 +15,20 @@ import Foundation
 enum Constants {
     // If you change any of the below properties, please uninstall and reinstall the application
     
-    static let APPID = "staging/1b50a869c4a2/bcd1a623883f/launch-e44d085fc760-development"
+    // UPDATED: Now configured for Demo EMEA Org (BF9C27AA6464801C0A495FD0@AdobeOrg)
+    // Datastream: 18fe5e7c-94ad-4f67-ba93-35cc04d726cc
+    // Property: apalmer iOS MessagingDemo App
+    static let APPID = "60e5fd51ad90/03598b9be987/launch-055cedda7e10-development"
     
-    // Other AppID's
+    // Previous AppID's (different orgs)
+    // "staging/1b50a869c4a2/bcd1a623883f/launch-e44d085fc760-development" << Steve B's org
     // "3149c49c3910/b6541e5e6301/launch-f7ac0a320fb3-development"
-    // "staging/1b50a869c4a2/bcd1a623883f/launch-e44d085fc760-development" << com.steveb.iamStagingTester
-    // "staging/1b50a869c4a2/9590f35e2dc9/launch-752d0a90822f-development" << com.steveb.priorityTester
     
-    static let isStage = true
-    static let assuranceURL = ""
+    static let isStage = false
+    // To auto-connect on launch, paste your Assurance session URL here:
+    // Get URL from: https://experience.adobe.com/assurance (Create Session)
+    // Example: "aepsdkstaging://com.adampadobe.aep-messaging-demo?adb_validation_sessionid=YOUR_SESSION_ID"
+    static let assuranceURL = "com.adampadobe.aep-messaging-demo://?adb_validation_sessionid=e5f86c6c-7b86-4d6a-8f84-ae117bf79df2"
     
     // Surface Names
     enum SurfaceName {

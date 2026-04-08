@@ -25,8 +25,8 @@ Use these when configuring the app in AEP/AJO:
 
 | Item | Value |
 |------|--------|
-| **App Bundle ID** | `com.adobe.MessagingDemoAppSwiftUI` |
-| **Widget Bundle ID** (Live Activity) | `com.adobe.MessagingDemoAppSwiftUI.WidgetMessagingDemoAppSwiftUI` |
+| **App Bundle ID** | `com.adampadobe.aep-messaging-demo` |
+| **Widget Bundle ID** (Live Activity) | `com.adampadobe.aep-messaging-demo.WidgetMessagingDemoAppSwiftUI` |
 | **Push entitlement** | Already in project (`aps-environment`: development) |
 | **Your Team ID** | From [Apple Developer → Membership](https://developer.apple.com/account) |
 | **APNs Key ID** | From Apple Developer → Keys (after creating APNs key) |
@@ -46,7 +46,7 @@ Use these when configuring the app in AEP/AJO:
 1. Go to [developer.apple.com/account → Identifiers](https://developer.apple.com/account/resources/identifiers/list).
 2. Click **+** → **App IDs** → **App**.
 3. Description: e.g. `AEP Messaging Demo SwiftUI`.
-4. **Bundle ID**: **Explicit** → `com.adobe.MessagingDemoAppSwiftUI` (must match the app).
+4. **Bundle ID**: **Explicit** → `com.adampadobe.aep-messaging-demo` (must match the app).
 5. Under **Capabilities**, enable:
    - **Push Notifications**
    - **Background Modes** (optional; enable “Remote notifications” if you use background push).
@@ -70,7 +70,7 @@ You will use in AEP:
 - The **.p8 file**
 - **Key ID**
 - **Team ID**
-- **Bundle ID**: `com.adobe.MessagingDemoAppSwiftUI`
+- **Bundle ID**: `com.adampadobe.aep-messaging-demo`
 
 ---
 
@@ -115,7 +115,7 @@ This token is what AEP/Journey Optimizer will use to send push and update Live A
    - **.p8 file** (upload)
    - **Key ID**
    - **Team ID**
-   - **Bundle ID**: `com.adobe.MessagingDemoAppSwiftUI`
+   - **Bundle ID**: `com.adampadobe.aep-messaging-demo`
 4. Save.
 
 References:
@@ -145,7 +145,7 @@ Once the app is registered in Apple Developer, credentials are added in AEP, and
 ## Summary checklist
 
 - [ ] Apple Developer Program enrolled ($99/year)
-- [ ] App ID created with Bundle ID `com.adobe.MessagingDemoAppSwiftUI` and Push Notifications enabled
+- [ ] App ID created with Bundle ID `com.adampadobe.aep-messaging-demo` and Push Notifications enabled
 - [ ] APNs key created; .p8 downloaded; Key ID and Team ID noted
 - [ ] Xcode: Team set for MessagingDemoAppSwiftUI; run on real iPhone
 - [ ] Push token (and ECID) copied from the app’s **Push** tab

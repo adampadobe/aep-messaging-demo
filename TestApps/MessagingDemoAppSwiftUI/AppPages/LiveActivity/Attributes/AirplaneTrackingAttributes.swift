@@ -37,9 +37,9 @@ extension AirplaneTrackingAttributes : LiveActivityAssuranceDebuggable {
     static func getDebugInfo() -> (attributes: AirplaneTrackingAttributes, state: ContentState) {
         return (AirplaneTrackingAttributes(
             liveActivityData: LiveActivityData(channelID: "channelXYZ"),
-            arrivalAirport: "SFO",
-            departureAirport: "MIA",
-            arrivalTerminal: "Terminal 3"
+            arrivalAirport: "LHR",
+            departureAirport: "AUH",
+            arrivalTerminal: "Terminal 5"
         ),
         ContentState(journeyProgress: 0))
 

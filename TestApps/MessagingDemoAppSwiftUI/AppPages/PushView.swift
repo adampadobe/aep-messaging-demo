@@ -12,10 +12,13 @@ governing permissions and limitations under the License.
 
 import SwiftUI
 import AEPEdgeIdentity
+import AEPCore
 
 struct PushView: View {
     @State private var ECID: String?
     @State private var devicePushToken: String?
+    @State private var showResetAlert = false
+    @State private var isResetting = false
 
     var body: some View {
         VStack {
@@ -31,6 +34,44 @@ struct PushView: View {
             
             InfoSection(title: "Push Token", value: devicePushToken ?? "Not Available") {
                 UIPasteboard.general.string = devicePushToken
+            }
+            if let token = devicePushToken, token.hasPrefix("SIM_") {
+                Text("Simulator placeholder – use a real device to receive push from AEP.")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .padding(.horizontal)
+            }
+            
+            Divider().frame(height: 30)
+            
+            // Reset Identity Button
+            Button(action: {
+                showResetAlert = true
+            }) {
+                HStack {
+                    Image(systemName: "arrow.counterclockwise.circle.fill")
+                    Text("Reset Identity & Get New ECID")
+                }
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(Color.red.opacity(0.8))
+                .foregroundColor(.white)
+                .cornerRadius(10)
+            }
+            .padding(.horizontal)
+            .disabled(isResetting)
+            .alert("Reset Identity?", isPresented: $showResetAlert) {
+                Button("Cancel", role: .cancel) { }
+                Button("Reset", role: .destructive) {
+                    resetIdentity()
+                }
+            } message: {
+                Text("This will generate a new ECID and reset all identities. Push token will be re-registered automatically.")
+            }
+            
+            if isResetting {
+                ProgressView("Resetting identity...")
+                    .padding()
             }
             
             Spacer()
@@ -51,6 +92,25 @@ struct PushView: View {
         
         // Retrieve the device push token from UserDefaults
         devicePushToken = UserDefaults.standard.string(forKey: "devicePushToken")
+    }
+    
+    // Function to reset identity and generate new ECID
+    private func resetIdentity() {
+        isResetting = true
+        
+        // Reset all identities (this will generate a new ECID)
+        MobileCore.resetIdentities()
+        
+        // Wait a moment for the reset to complete, then fetch new values
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            fetchInfo()
+            isResetting = false
+            
+            // Re-register for push notifications
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                appDelegate.registerForPushNotifications(UIApplication.shared)
+            }
+        }
     }
 }
 

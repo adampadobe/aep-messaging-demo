@@ -18,8 +18,9 @@ import AEPEdgeIdentity
 import AEPLifecycle
 import AEPSignal
 import AEPMessaging
+import UserNotifications
 
-final class AppDelegate: NSObject, UIApplicationDelegate {
+final class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         MobileCore.setLogLevel(.trace)
@@ -32,37 +33,32 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
 //            Consent.self,
             Messaging.self,
             Assurance.self,
-            TokenCollector.self
+            TokenCollector.self  // Re-enabled for push-to-start tokens
         ]
         
-        MobileCore.registerExtensions(extensions) {
-            MobileCore.configureWith(appId: Constants.APPID)
-            
-            if Constants.isStage {
-                MobileCore.updateConfigurationWith(configDict: ["edge.environment": "int"])
+        // Defer all SDK registration to next run loop so the window and first frame can render (avoids hang on device)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            MobileCore.registerExtensions(extensions) {
+                DispatchQueue.main.async {
+                    MobileCore.configureWith(appId: Constants.APPID)
+                    if Constants.isStage {
+                        MobileCore.updateConfigurationWith(configDict: ["edge.environment": "int"])
+                    }
+                    #if DEBUG
+                    MobileCore.updateConfigurationWith(configDict: ["messaging.useSandbox": true])
+                    #endif
+                    if let assuranceURL = URL(string: Constants.assuranceURL), !Constants.assuranceURL.isEmpty {
+                        Assurance.startSession(url: assuranceURL)
+                    }
+                    self.registerForPushNotifications(application)
+                    let cardSurface = Surface(path: Constants.SurfaceName.CONTENT_CARD)
+                    let cbeSurface1 = Surface(path: Constants.SurfaceName.CBE_HTML)
+                    let cbeSurface2 = Surface(path: Constants.SurfaceName.CBE_JSON)
+                    Messaging.updatePropositionsForSurfaces([cardSurface, cbeSurface1, cbeSurface2])
+                }
+                // Live Activity registration is done when user opens Live Activity tab (see LiveActivityView) to avoid launch hang
             }
-                
-            #if DEBUG
-                MobileCore.updateConfigurationWith(configDict: ["messaging.useSandbox": true])
-            #endif
-            
-            if !Constants.assuranceURL.isEmpty {
-                Assurance.startSession(url: URL(string: Constants.assuranceURL)!)
-            }
-            
-            self.registerForPushNotifications(application)
-            let cardSurface = Surface(path: Constants.SurfaceName.CONTENT_CARD)
-            let cbeSurface1 = Surface(path: Constants.SurfaceName.CBE_HTML)
-            let cbeSurface2 = Surface(path: Constants.SurfaceName.CBE_JSON)
-            Messaging.updatePropositionsForSurfaces([cardSurface,cbeSurface1, cbeSurface2])
-        }
-        
-        if #available(iOS 16.1, *) {
-            Messaging.registerLiveActivities([
-                AirplaneTrackingAttributes.self,
-                FoodDeliveryLiveActivityAttributes.self,
-                GameScoreLiveActivityAttributes.self
-            ])
         }
         
         return true
@@ -75,7 +71,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         center.requestAuthorization(options: [.badge, .sound, .alert]) { [weak self] granted, _ in
             guard granted else { return }
             
-            center.delegate = self as? UNUserNotificationCenterDelegate
+            center.delegate = self
             
             DispatchQueue.main.async {
                 application.registerForRemoteNotifications()
@@ -91,8 +87,14 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         MobileCore.setPushIdentifier(deviceToken)
     }
 
-    func application(_: UIApplication, didFailToRegisterForRemoteNotificationsWithError _: Error) {
+    func application(_: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         MobileCore.setPushIdentifier(nil)
+        #if targetEnvironment(simulator)
+        // Simulator doesn't get a real APNs token; store a placeholder so the Push tab shows something.
+        let placeholder = "SIM_\(String((0..<60).map { _ in "0123456789abcdef".randomElement()! }))"
+        UserDefaults.standard.set(placeholder, forKey: "devicePushToken")
+        print("Simulator: no real push token. Stored placeholder for UI. Use a real device for AEP.")
+        #endif
     }
     
     // MARK: - Handle Push Notification Reception

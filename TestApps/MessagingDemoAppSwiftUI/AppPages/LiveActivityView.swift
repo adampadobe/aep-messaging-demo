@@ -11,10 +11,13 @@ governing permissions and limitations under the License.
 */
 
 import SwiftUI
+import AEPMessaging
 
 // MARK: - LiveActivityView
 
 struct LiveActivityView: View {
+    /// Registration moved here from launch to avoid device hang; only runs once when user opens tab.
+    private static var hasRegisteredLiveActivities = false
     
     var body: some View {
         if #available(iOS 16.1, *) {
@@ -22,7 +25,7 @@ struct LiveActivityView: View {
             NavigationView {
                 mainContentView
             }
-            .onAppear {}
+            .onAppear { Self.registerLiveActivitiesIfNeeded() }
         } else {
             // Fallback for older versions
             Text("Live Activities are available only on iOS 16.1 or newer.")
@@ -66,11 +69,49 @@ struct LiveActivityView: View {
                         title: "Airplane Tracking \n Live Activity"
                     )
                 }
+                
+                // Card 4: Etihad Premium Flight
+                NavigationLink(destination: EtihadPremiumLiveActivityView()) {
+                    CardView(
+                        imageName: "EtihadLogo",
+                        title: "Etihad Premium \n Flight"
+                    )
+                }
+                
+                // Card 5: Etihad Boarding
+                NavigationLink(destination: EtihadBoardingLiveActivityView()) {
+                    CardView(
+                        imageName: "EtihadLogo",
+                        title: "Etihad Boarding \n Pass"
+                    )
+                }
+                
+                // Card 6: KSIA Airport Experience
+                NavigationLink(destination: KSIAAirportLiveActivityView()) {
+                    CardView(
+                        imageName: "KSIALogo",
+                        title: "KSIA Airport \n Experience"
+                    )
+                }
             }
             .padding(.horizontal, 20)
             .padding(.top, 10)            
             Spacer(minLength: 80) // Add space at the bottom for the banner
         }
+    }
+    
+    @available(iOS 16.1, *)
+    private static func registerLiveActivitiesIfNeeded() {
+        guard !hasRegisteredLiveActivities else { return }
+        hasRegisteredLiveActivities = true
+        Messaging.registerLiveActivities([
+            AirplaneTrackingAttributes.self,
+            FoodDeliveryLiveActivityAttributes.self,
+            GameScoreLiveActivityAttributes.self,
+            EtihadPremiumFlightAttributes.self,
+            EtihadBoardingAttributes.self,
+            KSIAAirportAttributes.self
+        ])
     }
 }
 
