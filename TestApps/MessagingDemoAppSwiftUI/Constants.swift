@@ -27,8 +27,8 @@ enum Constants {
     static let isStage = false
     // To auto-connect on launch, paste your Assurance session URL here:
     // Get URL from: https://experience.adobe.com/assurance (Create Session)
-    // Example: "aepsdkstaging://com.adampadobe.aep-messaging-demo?adb_validation_sessionid=YOUR_SESSION_ID"
-    static let assuranceURL = "com.adampadobe.aep-messaging-demo://?adb_validation_sessionid=e5f86c6c-7b86-4d6a-8f84-ae117bf79df2"
+    // Example: "messagingdemo://?adb_validation_sessionid=YOUR_SESSION_ID"
+    static let assuranceURL = "messagingdemo://?adb_validation_sessionid=4cbf83ae-a8d1-43fb-ae79-ed57d012aa53"
     
     // Surface Names
     enum SurfaceName {
