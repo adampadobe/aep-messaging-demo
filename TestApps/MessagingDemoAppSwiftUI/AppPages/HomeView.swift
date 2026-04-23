@@ -40,6 +40,10 @@ struct HomeView: View {
                         Label("Live Activity", systemImage: "app.badge")
                     }
             }
+            SettingsView()
+                .tabItem {
+                    Label("Settings", systemImage: "gearshape.fill")
+                }
         }
     }
 }

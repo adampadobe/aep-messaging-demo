@@ -18,13 +18,25 @@ import AEPAssurance
 struct MessagingDemoAppSwiftUIApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @Environment(\.scenePhase) private var scenePhase
-    
+
+    @StateObject private var iconManager = IconManager.shared
+    @State private var showBrandSplash: Bool = true
+
     var body: some Scene {
         WindowGroup {
-            HomeView()
-                .onOpenURL{ url in
-                    Assurance.startSession(url: url)
+            ZStack {
+                HomeView()
+                    .onOpenURL{ url in
+                        Assurance.startSession(url: url)
+                    }
+                if showBrandSplash {
+                    BrandSplashView(brand: iconManager.current) {
+                        showBrandSplash = false
+                    }
+                    .transition(.opacity)
+                    .zIndex(1)
                 }
+            }
         }
         .onChange(of: scenePhase) { phase in
             switch phase {
