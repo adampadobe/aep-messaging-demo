@@ -28,7 +28,7 @@ enum Constants {
     // To auto-connect on launch, paste your Assurance session URL here:
     // Get URL from: https://experience.adobe.com/assurance (Create Session)
     // Example: "messagingdemo://?adb_validation_sessionid=YOUR_SESSION_ID"
-    static let assuranceURL = "messagingdemo://?adb_validation_sessionid=4cbf83ae-a8d1-43fb-ae79-ed57d012aa53"
+    static let assuranceURL = "messagingdemo://?adb_validation_sessionid=337dbb92-042f-4b57-9cc6-13e252c33e86"
     
     // Surface Names
     enum SurfaceName {

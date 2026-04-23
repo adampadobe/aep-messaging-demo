@@ -34,7 +34,9 @@ class TokenCollector: NSObject ,ObservableObject, Extension {
     static var airplaneTrackingPushToStartToken: String = ""
     static var etihadPremiumPushToStartToken: String = ""
     static var etihadBoardingPushToStartToken: String = ""
+    static var flynasFlightPushToStartToken: String = ""
     static var ksiaAirportPushToStartToken: String = ""
+    static var travelPushToStartToken: String = ""
 
     
     public required init?(runtime: ExtensionRuntime) {
@@ -106,6 +108,15 @@ class TokenCollector: NSObject ,ObservableObject, Extension {
                         NSLog("Peaks LA : Updated EtihadBoarding push-to-start token: \(token)")
                     }
                 }
+
+                // Extract Flynas token
+                if let flynasToken = pushToStartTokens["FlynasFlightAttributes"] as? [String: Any],
+                   let token = flynasToken["token"] as? String {
+                    DispatchQueue.main.async {
+                        TokenCollector.flynasFlightPushToStartToken = token
+                        NSLog("Peaks LA : Updated Flynas push-to-start token: \(token)")
+                    }
+                }
                 
                 // Extract KSIA token
                 if let ksiaToken = pushToStartTokens["KSIAAirportAttributes"] as? [String: Any],
@@ -113,6 +124,15 @@ class TokenCollector: NSObject ,ObservableObject, Extension {
                     DispatchQueue.main.async {
                         TokenCollector.ksiaAirportPushToStartToken = token
                         NSLog("Peaks LA : Updated KSIA Airport push-to-start token: \(token)")
+                    }
+                }
+
+                // Extract Travel token
+                if let travelToken = pushToStartTokens["TravelLiveActivityAttributes"] as? [String: Any],
+                   let token = travelToken["token"] as? String {
+                    DispatchQueue.main.async {
+                        TokenCollector.travelPushToStartToken = token
+                        NSLog("Peaks LA : Updated Travel push-to-start token: \(token)")
                     }
                 }
             }

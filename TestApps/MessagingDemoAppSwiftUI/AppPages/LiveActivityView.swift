@@ -86,11 +86,29 @@ struct LiveActivityView: View {
                     )
                 }
                 
-                // Card 6: KSIA Airport Experience
+                // Card 6: Flynas Flight
+                NavigationLink(destination: FlynasLiveActivityView()) {
+                    BrandedCardView(
+                        brandName: "flynas",
+                        title: "Flynas \n Flight",
+                        backgroundColor: Color(red: 0.06, green: 0.49, blue: 0.28)
+                    )
+                }
+
+                // Card 7: KSIA Airport Experience
                 NavigationLink(destination: KSIAAirportLiveActivityView()) {
                     CardView(
                         imageName: "KSIALogo",
                         title: "KSIA Airport \n Experience"
+                    )
+                }
+
+                // Card 8: Travel (themeable, repeatable demo)
+                NavigationLink(destination: TravelLiveActivityView()) {
+                    BrandedCardView(
+                        brandName: "travel",
+                        title: "Travel \n Live Activity",
+                        backgroundColor: Color(red: 0.12, green: 0.16, blue: 0.27)
                     )
                 }
             }
@@ -110,7 +128,9 @@ struct LiveActivityView: View {
             GameScoreLiveActivityAttributes.self,
             EtihadPremiumFlightAttributes.self,
             EtihadBoardingAttributes.self,
-            KSIAAirportAttributes.self
+            FlynasFlightAttributes.self,
+            KSIAAirportAttributes.self,
+            TravelLiveActivityAttributes.self
         ])
     }
 }
@@ -134,6 +154,34 @@ struct CardView: View {
                 .multilineTextAlignment(.center)
         }
         .frame(width: 160, height: 180) // Ensures consistent size for all cards
+        .background(Color.gray.opacity(0.15))
+        .cornerRadius(12)
+    }
+}
+
+struct BrandedCardView: View {
+    let brandName: String
+    let title: String
+    let backgroundColor: Color
+
+    var body: some View {
+        VStack(spacing: 12) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 22)
+                    .fill(backgroundColor)
+
+                Text(brandName)
+                    .font(.system(size: 24, weight: .bold, design: .rounded))
+                    .foregroundColor(.white)
+            }
+            .frame(width: 90, height: 90)
+
+            Text(title)
+                .font(.headline)
+                .foregroundColor(.secondary)
+                .multilineTextAlignment(.center)
+        }
+        .frame(width: 160, height: 180)
         .background(Color.gray.opacity(0.15))
         .cornerRadius(12)
     }

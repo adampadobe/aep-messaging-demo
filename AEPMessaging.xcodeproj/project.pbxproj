@@ -23,6 +23,7 @@
 
 /* Begin PBXBuildFile section */
 		00CDF3D4D87662219C693956 /* KSIAAirportAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81E7F07946CF38A6D273421 /* KSIAAirportAttributes.swift */; };
+		087093B1FFADC7F5B680F77F /* TravelLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05D1D495CAAE6850732D467 /* TravelLiveActivity.swift */; };
 		090290C329D4EA9F00388226 /* MockCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2469A5E8274C107100E56457 /* MockCache.swift */; };
 		090290C529DCED0B00388226 /* ContentCardRulesEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090290C429DCED0B00388226 /* ContentCardRulesEngine.swift */; };
 		090290C929DD11EA00388226 /* RuleConsequence+Messaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090290C829DD11EA00388226 /* RuleConsequence+Messaging.swift */; };
@@ -201,6 +202,8 @@
 		24CA4BE12B61977800D16369 /* SurfaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CA4BE02B61977800D16369 /* SurfaceTests.swift */; };
 		24DE13ED2E9074F300D916DC /* ruleWithDefaultContentConsequence.json in Resources */ = {isa = PBXBuildFile; fileRef = 24DE13EC2E9074E700D916DC /* ruleWithDefaultContentConsequence.json */; };
 		24FD5F752CEEA50F00AE4567 /* CompletionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FD5F742CEEA50400AE4567 /* CompletionHandler.swift */; };
+		2C13BE0755C549F8916762D7 /* FlynasLiveActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618D4DF06F1B5D60B6026813 /* FlynasLiveActivityView.swift */; };
+		2EFB232F65D8A5892B4A0B16 /* TravelLiveActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19F021847D76A2B78E63FBF /* TravelLiveActivityView.swift */; };
 		4C0111D72DB30FD900996757 /* LiveActivityOrigin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0111D62DB30FD900996757 /* LiveActivityOrigin.swift */; };
 		4C075D6E2DDE74D70082B66C /* ChannelActivityStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C075D6D2DDE74D70082B66C /* ChannelActivityStore.swift */; };
 		4C075D722DDE83D20082B66C /* PersistenceStoreBaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C075D712DDE83D20082B66C /* PersistenceStoreBaseTests.swift */; };
@@ -259,7 +262,10 @@
 		755DB8D42E1EC54700F3B21B /* ImageOnlyTemplateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755DB8D32E1EC54700F3B21B /* ImageOnlyTemplateTest.swift */; };
 		755DB8D82E1EC5C200F3B21B /* ImageOnlyCard.json in Resources */ = {isa = PBXBuildFile; fileRef = 755DB8D62E1EC5C200F3B21B /* ImageOnlyCard.json */; };
 		755DB8DA2E1EC67D00F3B21B /* ImageOnlyTemplateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755DB8D92E1EC67D00F3B21B /* ImageOnlyTemplateTests.swift */; };
+		78FD7BC272965BF4DB6FC38C /* FlynasFlightAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145E8C0CC8F53B5E00EA1D50 /* FlynasFlightAttributes.swift */; };
+		7F2198CB454EA77AEF1ACAED /* FlynasFlightAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145E8C0CC8F53B5E00EA1D50 /* FlynasFlightAttributes.swift */; };
 		8306057F6EE4683383660BD8 /* Pods_MessagingDemoAppObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BDCBFF342013F2FF0CE1472 /* Pods_MessagingDemoAppObjC.framework */; };
+		836EB2A76866A5DD56A4C12C /* TravelLogoCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B787D3AEC0B4FCFC639C3C59 /* TravelLogoCache.swift */; };
 		846794A21245172CEE3FF1CA /* Pods_E2EFunctionalTestApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B18970846882D9DC0CD1C50 /* Pods_E2EFunctionalTestApp.framework */; };
 		92315508261E444A004AE7D3 /* AEPMessaging.h in Headers */ = {isa = PBXBuildFile; fileRef = 92315435261E3B36004AE7D3 /* AEPMessaging.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9249A4E2252292AB009193AB /* AEPMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 925DF4A525227C4700A5DE31 /* AEPMessaging.framework */; };
@@ -282,6 +288,8 @@
 		A583FC9173E905F9E5DF6D0F /* Pods_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B86A865B6338E5FAFD760F08 /* Pods_UnitTests.framework */; };
 		AB1194E3533C5CF3534A3AD0 /* EtihadBoardingAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD83A2D350B0FE2A8177D8C /* EtihadBoardingAttributes.swift */; };
 		AE619CED1A055657E7500525 /* KSIAAirportLiveActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFE600BE7E6E28C762499F /* KSIAAirportLiveActivityView.swift */; };
+		B27ABE633636E5723829A952 /* TravelLiveActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CA43E1EBEABAA1056A0C2D /* TravelLiveActivityAttributes.swift */; };
+		B378EBC6341FD37662CAB617 /* TravelTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5CFABC0872253EB73E7F7A /* TravelTheme.swift */; };
 		B42C4B4F21284FB6EDC07676 /* Pods_IntegrationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7872C9FF7BE2CF1D18017C01 /* Pods_IntegrationTests.framework */; };
 		B6165DA629A67ADA0031B84D /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6165DA529A67ADA0031B84D /* NotificationService.swift */; };
 		B6165DAA29A67ADA0031B84D /* NotificationService.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B6165DA329A67AD90031B84D /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -401,6 +409,9 @@
 		B6F7CCC52CCA1D7100C35C64 /* small image no image.json in Resources */ = {isa = PBXBuildFile; fileRef = B6F7CC132CC2EFE400C35C64 /* small image no image.json */; };
 		B6F7CCC62CCA1D7C00C35C64 /* NoCard.json in Resources */ = {isa = PBXBuildFile; fileRef = B6F7CC182CC2EFE400C35C64 /* NoCard.json */; };
 		B6F7CCC72CCA1D7C00C35C64 /* MultipleCards.json in Resources */ = {isa = PBXBuildFile; fileRef = B6F7CC172CC2EFE400C35C64 /* MultipleCards.json */; };
+		C078382909CDABD4FA50F614 /* TravelLogoCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B787D3AEC0B4FCFC639C3C59 /* TravelLogoCache.swift */; };
+		C33C9363425C661D4CB058CB /* FlynasLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CD8FD8C205713EB5600256 /* FlynasLiveActivity.swift */; };
+		C88EE362861DCCF998E89CA1 /* TravelLiveActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CA43E1EBEABAA1056A0C2D /* TravelLiveActivityAttributes.swift */; };
 		C9AF8714AE3BF5785C14898C /* EtihadPremiumFlightAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5760AF6F1BFF05AFEAF1F8E2 /* EtihadPremiumFlightAttributes.swift */; };
 		CB4DB3613E8FD4B78B164916 /* Pods_FunctionalTestApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1331B50C344AD02FE0C9E2BF /* Pods_FunctionalTestApp.framework */; };
 		CE53E27C0244D04DB0CCDFC7 /* KSIAAirportAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81E7F07946CF38A6D273421 /* KSIAAirportAttributes.swift */; };
@@ -414,6 +425,7 @@
 		E2F15A5C1B92033400A07D85 /* EtihadBoardingLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A23F8317AAEBB040AE268E /* EtihadBoardingLiveActivity.swift */; };
 		EB32695532003551BAEF8D43 /* EtihadPremiumFlightAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5760AF6F1BFF05AFEAF1F8E2 /* EtihadPremiumFlightAttributes.swift */; };
 		EFE8E9849129D03F63D6FB55 /* KSIAAirportLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52483DA0910210F689F70B4A /* KSIAAirportLiveActivity.swift */; };
+		FD180BD99D2E10A20980FEEE /* TravelTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5CFABC0872253EB73E7F7A /* TravelTheme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -667,6 +679,7 @@
 		0DAFE600BE7E6E28C762499F /* KSIAAirportLiveActivityView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KSIAAirportLiveActivityView.swift; path = TestApps/MessagingDemoAppSwiftUI/AppPages/LiveActivity/Pages/KSIAAirportLiveActivityView.swift; sourceTree = "<group>"; };
 		0F630F3E2F0ED2DE0080688A /* LiveActivityBatchTokenCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityBatchTokenCollector.swift; sourceTree = "<group>"; };
 		1331B50C344AD02FE0C9E2BF /* Pods_FunctionalTestApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FunctionalTestApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		145E8C0CC8F53B5E00EA1D50 /* FlynasFlightAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FlynasFlightAttributes.swift; path = TestApps/MessagingDemoAppSwiftUI/AppPages/LiveActivity/Attributes/FlynasFlightAttributes.swift; sourceTree = "<group>"; };
 		1F4E259E7D8AA8C9CC161945 /* Pods-UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.debug.xcconfig"; path = "Target Support Files/Pods-UnitTests/Pods-UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		20F6C93A259B55959EF4EA0C /* Pods-E2EFunctionalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E2EFunctionalTests.release.xcconfig"; path = "Target Support Files/Pods-E2EFunctionalTests/Pods-E2EFunctionalTests.release.xcconfig"; sourceTree = "<group>"; };
 		233D0E8FD8252487C368E8F3 /* Pods_MessagingDemoAppSwiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MessagingDemoAppSwiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -806,6 +819,7 @@
 		28D6E4E97B560158744075F9 /* Pods-FunctionalTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FunctionalTests.debug.xcconfig"; path = "Target Support Files/Pods-FunctionalTests/Pods-FunctionalTests.debug.xcconfig"; sourceTree = "<group>"; };
 		29328F7F748796787B53604C /* Pods-FunctionalTestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FunctionalTestApp.debug.xcconfig"; path = "Target Support Files/Pods-FunctionalTestApp/Pods-FunctionalTestApp.debug.xcconfig"; sourceTree = "<group>"; };
 		2B84E8FD674BD07F86C712FD /* Pods-AEPMessaging.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AEPMessaging.release.xcconfig"; path = "Target Support Files/Pods-AEPMessaging/Pods-AEPMessaging.release.xcconfig"; sourceTree = "<group>"; };
+		2E5CFABC0872253EB73E7F7A /* TravelTheme.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TravelTheme.swift; path = TestApps/MessagingDemoAppSwiftUI/AppPages/LiveActivity/Travel/TravelTheme.swift; sourceTree = "<group>"; };
 		36D3F6949A279969C6766FF5 /* Pods_E2EFunctionalTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_E2EFunctionalTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D55E83254139642A1CAA76E /* Pods_FunctionalTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FunctionalTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43204BBDCB8D5720A0D56E52 /* Pods-IntegrationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntegrationTests.release.xcconfig"; path = "Target Support Files/Pods-IntegrationTests/Pods-IntegrationTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -841,6 +855,7 @@
 		51E066FE4BB8537A3C75AB19 /* EtihadPremiumLiveActivity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EtihadPremiumLiveActivity.swift; path = TestApps/WidgetMessagingDemoAppSwiftUI/LiveActivityUI/EtihadPremium/EtihadPremiumLiveActivity.swift; sourceTree = "<group>"; };
 		52483DA0910210F689F70B4A /* KSIAAirportLiveActivity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KSIAAirportLiveActivity.swift; path = TestApps/WidgetMessagingDemoAppSwiftUI/LiveActivityUI/KSIA/KSIAAirportLiveActivity.swift; sourceTree = "<group>"; };
 		5760AF6F1BFF05AFEAF1F8E2 /* EtihadPremiumFlightAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EtihadPremiumFlightAttributes.swift; path = TestApps/MessagingDemoAppSwiftUI/AppPages/LiveActivity/Attributes/EtihadPremiumFlightAttributes.swift; sourceTree = "<group>"; };
+		618D4DF06F1B5D60B6026813 /* FlynasLiveActivityView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FlynasLiveActivityView.swift; path = TestApps/MessagingDemoAppSwiftUI/AppPages/LiveActivity/Pages/FlynasLiveActivityView.swift; sourceTree = "<group>"; };
 		6346827F4BC239DF7DDFD044 /* Pods-MessagingDemoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagingDemoApp.debug.xcconfig"; path = "Target Support Files/Pods-MessagingDemoApp/Pods-MessagingDemoApp.debug.xcconfig"; sourceTree = "<group>"; };
 		6912F64FC8C8BFAF5ACD8EF0 /* Pods-UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.release.xcconfig"; path = "Target Support Files/Pods-UnitTests/Pods-UnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		71895CC75A7A5B934C60718F /* Pods-E2EFunctionalTestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E2EFunctionalTestApp.debug.xcconfig"; path = "Target Support Files/Pods-E2EFunctionalTestApp/Pods-E2EFunctionalTestApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -872,6 +887,7 @@
 		7872C9FF7BE2CF1D18017C01 /* Pods_IntegrationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IntegrationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F70E88849D525557B4248E5 /* Pods-FunctionalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FunctionalTests.release.xcconfig"; path = "Target Support Files/Pods-FunctionalTests/Pods-FunctionalTests.release.xcconfig"; sourceTree = "<group>"; };
 		815925477A42C1BB986AD2BA /* Pods-MessagingDemoAppObjC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagingDemoAppObjC.release.xcconfig"; path = "Target Support Files/Pods-MessagingDemoAppObjC/Pods-MessagingDemoAppObjC.release.xcconfig"; sourceTree = "<group>"; };
+		83CD8FD8C205713EB5600256 /* FlynasLiveActivity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FlynasLiveActivity.swift; path = TestApps/WidgetMessagingDemoAppSwiftUI/LiveActivityUI/Flynas/FlynasLiveActivity.swift; sourceTree = "<group>"; };
 		8B18970846882D9DC0CD1C50 /* Pods_E2EFunctionalTestApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_E2EFunctionalTestApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D7745B1452107BAE150E518 /* Pods-MessagingDemoAppSwiftUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagingDemoAppSwiftUI.release.xcconfig"; path = "Target Support Files/Pods-MessagingDemoAppSwiftUI/Pods-MessagingDemoAppSwiftUI.release.xcconfig"; sourceTree = "<group>"; };
 		910478188AACAB204271B79F /* EtihadBoardingLiveActivityView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EtihadBoardingLiveActivityView.swift; path = TestApps/MessagingDemoAppSwiftUI/AppPages/LiveActivity/Pages/EtihadBoardingLiveActivityView.swift; sourceTree = "<group>"; };
@@ -905,7 +921,9 @@
 		92FC587C2636840C005BAE02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92FC594426372E34005BAE02 /* MockNotificationResponseCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNotificationResponseCoder.swift; sourceTree = "<group>"; };
 		9BDCBFF342013F2FF0CE1472 /* Pods_MessagingDemoAppObjC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MessagingDemoAppObjC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A05D1D495CAAE6850732D467 /* TravelLiveActivity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TravelLiveActivity.swift; path = TestApps/WidgetMessagingDemoAppSwiftUI/LiveActivityUI/Travel/TravelLiveActivity.swift; sourceTree = "<group>"; };
 		A4674E5E3D4CA595638A62EB /* Pods_MessagingDemoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MessagingDemoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7CA43E1EBEABAA1056A0C2D /* TravelLiveActivityAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TravelLiveActivityAttributes.swift; path = TestApps/MessagingDemoAppSwiftUI/AppPages/LiveActivity/Attributes/TravelLiveActivityAttributes.swift; sourceTree = "<group>"; };
 		B2A548464C27C249C6FB3777 /* EtihadPremiumLiveActivityView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EtihadPremiumLiveActivityView.swift; path = TestApps/MessagingDemoAppSwiftUI/AppPages/LiveActivity/Pages/EtihadPremiumLiveActivityView.swift; sourceTree = "<group>"; };
 		B6165DA329A67AD90031B84D /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6165DA529A67ADA0031B84D /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
@@ -1025,9 +1043,11 @@
 		B6F7CCB62CCA186600C35C64 /* SmallImageCustomizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallImageCustomizer.swift; sourceTree = "<group>"; };
 		B6F7CCB82CCA186600C35C64 /* SmallImageTemplateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallImageTemplateTest.swift; sourceTree = "<group>"; };
 		B6F7CCC82CCAB18700C35C64 /* IntegrationTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = IntegrationTestPlan.xctestplan; sourceTree = "<group>"; };
+		B787D3AEC0B4FCFC639C3C59 /* TravelLogoCache.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TravelLogoCache.swift; path = TestApps/MessagingDemoAppSwiftUI/AppPages/LiveActivity/Travel/TravelLogoCache.swift; sourceTree = "<group>"; };
 		B7B411B1F9538EB09000C67E /* Pods_AEPMessaging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AEPMessaging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B86A865B6338E5FAFD760F08 /* Pods_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF90DF53585960AE051234A9 /* Pods-IntegrationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntegrationTests.debug.xcconfig"; path = "Target Support Files/Pods-IntegrationTests/Pods-IntegrationTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C19F021847D76A2B78E63FBF /* TravelLiveActivityView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TravelLiveActivityView.swift; path = TestApps/MessagingDemoAppSwiftUI/AppPages/LiveActivity/Pages/TravelLiveActivityView.swift; sourceTree = "<group>"; };
 		C5A23F8317AAEBB040AE268E /* EtihadBoardingLiveActivity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EtihadBoardingLiveActivity.swift; path = TestApps/WidgetMessagingDemoAppSwiftUI/LiveActivityUI/EtihadBoarding/EtihadBoardingLiveActivity.swift; sourceTree = "<group>"; };
 		C7465CB5D942426740F36F97 /* Pods-MessagingDemoAppSwiftUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagingDemoAppSwiftUI.debug.xcconfig"; path = "Target Support Files/Pods-MessagingDemoAppSwiftUI/Pods-MessagingDemoAppSwiftUI.debug.xcconfig"; sourceTree = "<group>"; };
 		D5773DB866CADAB59B3043AE /* Pods-FunctionalTestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FunctionalTestApp.release.xcconfig"; path = "Target Support Files/Pods-FunctionalTestApp/Pods-FunctionalTestApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -1039,6 +1059,7 @@
 		E7A2B17D34C47FB6CA55B1E9 /* Pods-MessagingDemoAppObjC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagingDemoAppObjC.debug.xcconfig"; path = "Target Support Files/Pods-MessagingDemoAppObjC/Pods-MessagingDemoAppObjC.debug.xcconfig"; sourceTree = "<group>"; };
 		ECD83A2D350B0FE2A8177D8C /* EtihadBoardingAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EtihadBoardingAttributes.swift; path = TestApps/MessagingDemoAppSwiftUI/AppPages/LiveActivity/Attributes/EtihadBoardingAttributes.swift; sourceTree = "<group>"; };
 		EF179C2F973B478E3EA6F0EB /* Pods-E2EFunctionalTestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E2EFunctionalTestApp.release.xcconfig"; path = "Target Support Files/Pods-E2EFunctionalTestApp/Pods-E2EFunctionalTestApp.release.xcconfig"; sourceTree = "<group>"; };
+		F44625E12F29AA20A221131C /* WidgetMessagingDemoAppSwiftUI.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; name = WidgetMessagingDemoAppSwiftUI.entitlements; path = TestApps/WidgetMessagingDemoAppSwiftUI/WidgetMessagingDemoAppSwiftUI.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1387,6 +1408,19 @@
 			path = ImageOnlyCard;
 			sourceTree = "<group>";
 		};
+		755E4042B85520131C212FCD /* LiveActivity */ = {
+			isa = PBXGroup;
+			children = (
+				A7CA43E1EBEABAA1056A0C2D /* TravelLiveActivityAttributes.swift */,
+				B787D3AEC0B4FCFC639C3C59 /* TravelLogoCache.swift */,
+				2E5CFABC0872253EB73E7F7A /* TravelTheme.swift */,
+				C19F021847D76A2B78E63FBF /* TravelLiveActivityView.swift */,
+				A05D1D495CAAE6850732D467 /* TravelLiveActivity.swift */,
+				F44625E12F29AA20A221131C /* WidgetMessagingDemoAppSwiftUI.entitlements */,
+			);
+			name = LiveActivity;
+			sourceTree = "<group>";
+		};
 		922FFCE6251B2BBA00BCE010 = {
 			isa = PBXGroup;
 			children = (
@@ -1409,6 +1443,10 @@
 				D81E7F07946CF38A6D273421 /* KSIAAirportAttributes.swift */,
 				0DAFE600BE7E6E28C762499F /* KSIAAirportLiveActivityView.swift */,
 				52483DA0910210F689F70B4A /* KSIAAirportLiveActivity.swift */,
+				145E8C0CC8F53B5E00EA1D50 /* FlynasFlightAttributes.swift */,
+				618D4DF06F1B5D60B6026813 /* FlynasLiveActivityView.swift */,
+				83CD8FD8C205713EB5600256 /* FlynasLiveActivity.swift */,
+				755E4042B85520131C212FCD /* LiveActivity */,
 			);
 			sourceTree = "<group>";
 		};
@@ -3037,6 +3075,12 @@
 				D99551ACFA0CCD0A03EC6E65 /* EtihadBoardingLiveActivityView.swift in Sources */,
 				00CDF3D4D87662219C693956 /* KSIAAirportAttributes.swift in Sources */,
 				AE619CED1A055657E7500525 /* KSIAAirportLiveActivityView.swift in Sources */,
+				78FD7BC272965BF4DB6FC38C /* FlynasFlightAttributes.swift in Sources */,
+				2C13BE0755C549F8916762D7 /* FlynasLiveActivityView.swift in Sources */,
+				B27ABE633636E5723829A952 /* TravelLiveActivityAttributes.swift in Sources */,
+				C078382909CDABD4FA50F614 /* TravelLogoCache.swift in Sources */,
+				FD180BD99D2E10A20980FEEE /* TravelTheme.swift in Sources */,
+				2EFB232F65D8A5892B4A0B16 /* TravelLiveActivityView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3345,6 +3389,12 @@
 				E2F15A5C1B92033400A07D85 /* EtihadBoardingLiveActivity.swift in Sources */,
 				CE53E27C0244D04DB0CCDFC7 /* KSIAAirportAttributes.swift in Sources */,
 				EFE8E9849129D03F63D6FB55 /* KSIAAirportLiveActivity.swift in Sources */,
+				7F2198CB454EA77AEF1ACAED /* FlynasFlightAttributes.swift in Sources */,
+				C33C9363425C661D4CB058CB /* FlynasLiveActivity.swift in Sources */,
+				C88EE362861DCCF998E89CA1 /* TravelLiveActivityAttributes.swift in Sources */,
+				836EB2A76866A5DD56A4C12C /* TravelLogoCache.swift in Sources */,
+				B378EBC6341FD37662CAB617 /* TravelTheme.swift in Sources */,
+				087093B1FFADC7F5B680F77F /* TravelLiveActivity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4341,6 +4391,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = TestApps/WidgetMessagingDemoAppSwiftUI/WidgetMessagingDemoAppSwiftUI.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = A35LKWB5H8;
@@ -4375,6 +4426,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = TestApps/WidgetMessagingDemoAppSwiftUI/WidgetMessagingDemoAppSwiftUI.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = A35LKWB5H8;

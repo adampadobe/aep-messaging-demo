@@ -22,6 +22,10 @@ import UserNotifications
 
 final class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
+    /// Avoid starting Assurance before remote Tag config is applied; `configureWith(appId:)` is async and
+    /// Assurance needs `experienceCloud.org` from that config (otherwise org/sandbox show as unknown).
+    private var didStartAssuranceAfterConfiguration = false
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         MobileCore.setLogLevel(.trace)
 
@@ -41,6 +45,16 @@ final class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCent
             guard let self = self else { return }
             MobileCore.registerExtensions(extensions) {
                 DispatchQueue.main.async {
+                    MobileCore.registerEventListener(type: EventType.configuration, source: EventSource.responseContent) { [weak self] event in
+                        guard let self = self else { return }
+                        guard !self.didStartAssuranceAfterConfiguration else { return }
+                        guard let org = event.data?["experienceCloud.org"] as? String, !org.isEmpty else { return }
+                        self.didStartAssuranceAfterConfiguration = true
+                        DispatchQueue.main.async {
+                            self.startAssuranceAndLoadMessagingSurfaces()
+                        }
+                    }
+
                     MobileCore.configureWith(appId: Constants.APPID)
                     if Constants.isStage {
                         MobileCore.updateConfigurationWith(configDict: ["edge.environment": "int"])
@@ -48,14 +62,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCent
                     #if DEBUG
                     MobileCore.updateConfigurationWith(configDict: ["messaging.useSandbox": true])
                     #endif
-                    if let assuranceURL = URL(string: Constants.assuranceURL), !Constants.assuranceURL.isEmpty {
-                        Assurance.startSession(url: assuranceURL)
-                    }
                     self.registerForPushNotifications(application)
-                    let cardSurface = Surface(path: Constants.SurfaceName.CONTENT_CARD)
-                    let cbeSurface1 = Surface(path: Constants.SurfaceName.CBE_HTML)
-                    let cbeSurface2 = Surface(path: Constants.SurfaceName.CBE_JSON)
-                    Messaging.updatePropositionsForSurfaces([cardSurface, cbeSurface1, cbeSurface2])
                 }
                 // Live Activity registration is done when user opens Live Activity tab (see LiveActivityView) to avoid launch hang
             }
@@ -63,7 +70,17 @@ final class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCent
         
         return true
     }
-        
+
+    private func startAssuranceAndLoadMessagingSurfaces() {
+        if let assuranceURL = URL(string: Constants.assuranceURL), !Constants.assuranceURL.isEmpty {
+            Assurance.startSession(url: assuranceURL)
+        }
+        let cardSurface = Surface(path: Constants.SurfaceName.CONTENT_CARD)
+        let cbeSurface1 = Surface(path: Constants.SurfaceName.CBE_HTML)
+        let cbeSurface2 = Surface(path: Constants.SurfaceName.CBE_JSON)
+        Messaging.updatePropositionsForSurfaces([cardSurface, cbeSurface1, cbeSurface2])
+    }
+
     // MARK: - Push Notification registration methods
     func registerForPushNotifications(_ application : UIApplication) {
         let center = UNUserNotificationCenter.current()

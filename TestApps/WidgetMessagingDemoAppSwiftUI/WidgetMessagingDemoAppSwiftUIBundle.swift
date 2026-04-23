@@ -21,6 +21,8 @@ struct WidgetMessagingDemoAppSwiftUIBundle: WidgetBundle {
         AirplaneLiveActivity()
         EtihadPremiumLiveActivity()
         EtihadBoardingLiveActivity()
+        FlynasLiveActivity()
         KSIAAirportLiveActivity()
+        TravelLiveActivity()
     }
 }

@@ -14,6 +14,7 @@
     import ActivityKit
 #endif
 
+import Foundation
 import AEPCore
 import AEPMessagingLiveActivity
 import AEPServices
