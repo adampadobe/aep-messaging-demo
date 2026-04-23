@@ -50,11 +50,46 @@ struct TravelLiveActivityView: View {
     @State private var journeyProgress: Double = 25
     @State private var wifiAvailable: Bool = true
     @State private var currentLocation: String = "Wi-Fi available onboard"
-    @State private var boardingStatus: String = "Boarding now"
+    @State private var boardingStatus: String = ""              // free-text override; empty = use stage label
     @State private var terminal: String = "Terminal A"
     @State private var gate: String = "D4B"
+    @State private var seatNumber: String = "12A"
     @State private var statusMessageField: String = "Terminal A - Gate D4B"
     @State private var dwellTimeMessage: String = "Visit Al Dahlah Lounge - Level 2"
+
+    // MARK: - State – journey stage + status pill colour
+    @State private var selectedJourneyStage: TravelLiveActivityAttributes.JourneyStage = .boardingNow
+    @State private var statusColorMode: StatusColorMode = .auto
+    @State private var customStatusHex: String = ""
+
+    /// Quick presets for the status pill colour. `.auto` lets the
+    /// `JourneyStage` default colour drive the pill (red / amber / green / blue).
+    enum StatusColorMode: String, CaseIterable, Identifiable, Hashable {
+        case auto, red, amber, green, blue, custom
+        var id: String { rawValue }
+        var label: String {
+            switch self {
+            case .auto:   return "Auto"
+            case .red:    return "Red"
+            case .amber:  return "Amber"
+            case .green:  return "Green"
+            case .blue:   return "Blue"
+            case .custom: return "Custom"
+            }
+        }
+        /// Returns the hex string that should be sent in the payload, or
+        /// `nil` for `.auto` (no override – stage default takes over).
+        func resolvedHex(custom: String) -> String? {
+            switch self {
+            case .auto:   return nil
+            case .red:    return "#E53935"
+            case .amber:  return "#F39C12"
+            case .green:  return "#27AE60"
+            case .blue:   return "#2D7AB8"
+            case .custom: return custom.isEmpty ? nil : custom
+            }
+        }
+    }
 
     var body: some View {
         ScrollView {
@@ -72,9 +107,11 @@ struct TravelLiveActivityView: View {
                 themeSection
                 routeSection
                 phaseSection
+                journeyStageSection
                 startActivitySection
                 channelActivitySection
                 phaseUpdateButtonsSection
+                quickScenariosSection
 
                 if let statusMessage {
                     Text(statusMessage)
@@ -183,7 +220,7 @@ private extension TravelLiveActivityView {
             switch selectedPhase {
             case .flight:
                 VStack(alignment: .leading, spacing: 6) {
-                    TextField("Status (e.g. Departed)", text: $status)
+                    TextField("Legacy status text (optional, falls back to Journey Stage)", text: $status)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     Text("Journey Progress: \(Int(journeyProgress))%")
                         .font(.caption)
@@ -194,19 +231,16 @@ private extension TravelLiveActivityView {
                 }
             case .boarding:
                 VStack(alignment: .leading, spacing: 6) {
-                    TextField("Boarding status (e.g. Boarding now)", text: $boardingStatus)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
                     HStack {
                         TextField("Terminal", text: $terminal).textFieldStyle(RoundedBorderTextFieldStyle())
                         TextField("Gate", text: $gate).textFieldStyle(RoundedBorderTextFieldStyle())
+                        TextField("Seat", text: $seatNumber).textFieldStyle(RoundedBorderTextFieldStyle())
                     }
-                    TextField("Status message", text: $statusMessageField)
+                    TextField("Status message (e.g. Terminal A - Gate D4B)", text: $statusMessageField)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
             case .airport:
                 VStack(alignment: .leading, spacing: 6) {
-                    TextField("Boarding status (e.g. Explore Airport)", text: $boardingStatus)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
                     TextField("Status message (e.g. Gate opens in 90 minutes)", text: $statusMessageField)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     TextField("Dwell-time tip", text: $dwellTimeMessage)
@@ -215,6 +249,93 @@ private extension TravelLiveActivityView {
             }
         }
         .padding(.horizontal, 10)
+    }
+
+    /// New: dedicated journey-stage section. Picks the canonical stage,
+    /// optionally overrides its label / colour, previews the resolved pill.
+    var journeyStageSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            SectionHeader(title: "Journey Stage")
+            SectionDescription(text: "The stage drives the status-pill label and colour. Override either via the free-text label or the colour picker.")
+
+            HStack {
+                Text("Stage")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                Spacer()
+                Menu {
+                    ForEach(TravelLiveActivityAttributes.JourneyStage.allCases, id: \.self) { stage in
+                        Button(stage.defaultLabel) {
+                            selectedJourneyStage = stage
+                            // Auto-pivot the phase to the stage's natural layout
+                            selectedPhase = stage.suggestedPhase
+                            // Clear free-text override so the stage's label wins
+                            boardingStatus = ""
+                            // Reset colour to auto so the stage's default colour wins
+                            statusColorMode = .auto
+                        }
+                    }
+                } label: {
+                    HStack(spacing: 4) {
+                        Text(selectedJourneyStage.defaultLabel)
+                            .fontWeight(.medium)
+                        Image(systemName: "chevron.down")
+                            .font(.caption2)
+                    }
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 6)
+                    .background(Color(UIColor.systemGray6))
+                    .cornerRadius(6)
+                }
+            }
+
+            TextField("Override label (optional, blank = use stage default)", text: $boardingStatus)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text("Pill colour")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                Picker("Pill colour", selection: $statusColorMode) {
+                    ForEach(StatusColorMode.allCases) { mode in
+                        Text(mode.label).tag(mode)
+                    }
+                }
+                .pickerStyle(.segmented)
+
+                if statusColorMode == .custom {
+                    TextField("#RRGGBB", text: $customStatusHex)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .autocapitalization(.allCharacters)
+                        .disableAutocorrection(true)
+                }
+            }
+
+            statusPillPreview
+        }
+        .padding(.horizontal, 10)
+    }
+
+    /// Live preview of what the resolved pill (label + colour) will look like.
+    var statusPillPreview: some View {
+        let label = boardingStatus.isEmpty ? selectedJourneyStage.defaultLabel : boardingStatus
+        let hex = statusColorMode.resolvedHex(custom: customStatusHex)
+            ?? selectedJourneyStage.defaultColorHex
+        let color = Color(hex: hex) ?? Color.gray
+        return HStack(spacing: 8) {
+            Text("Preview")
+                .font(.caption)
+                .foregroundColor(.secondary)
+            Text(label)
+                .font(.caption)
+                .fontWeight(.semibold)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 4)
+                .background(color)
+                .cornerRadius(6)
+                .foregroundColor(.white)
+            Spacer()
+        }
     }
 
     var startActivitySection: some View {
@@ -261,6 +382,59 @@ private extension TravelLiveActivityView {
             .padding(.top, 6)
         }
         .padding(.horizontal, 10)
+    }
+
+    /// One-tap travel-companion scenarios. Each preset configures the form
+    /// to a sensible state for that journey stage and immediately pushes
+    /// the update to all running Travel activities. Presents the journey
+    /// in roughly the order a passenger would experience it so a demo run
+    /// can walk top-to-bottom-left-to-right.
+    var quickScenariosSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            SectionHeader(title: "Quick scenarios")
+            SectionDescription(text: "Walk through a full travel journey. Each tap configures the form and pushes to every running activity.")
+
+            // Three rows of stages so the buttons stay tappable.
+            ForEach(scenarioRows.indices, id: \.self) { rowIndex in
+                HStack(spacing: 6) {
+                    ForEach(scenarioRows[rowIndex], id: \.self) { stage in
+                        scenarioButton(stage: stage)
+                    }
+                }
+            }
+        }
+        .padding(.horizontal, 10)
+    }
+
+    /// Stages grouped by area of journey.
+    var scenarioRows: [[TravelLiveActivityAttributes.JourneyStage]] {
+        [
+            // Pre-airport / airside
+            [.checkInOpen, .checkedIn, .goToSecurity, .throughSecurity, .exploreAirport],
+            // Gate / boarding
+            [.goToGate, .boardingSoon, .boardingNow, .finalCall, .gateChange, .gateClosing, .gateClosed, .boarded],
+            // Flight + arrival + disruption
+            [.departed, .inFlight, .landed, .arrivedAtGate, .baggageReady, .delayed, .cancelled]
+        ]
+    }
+
+    func scenarioButton(stage: TravelLiveActivityAttributes.JourneyStage) -> some View {
+        let color = Color(hex: stage.defaultColorHex) ?? .gray
+        return Button {
+            applyScenario(stage)
+        } label: {
+            Text(stage.defaultLabel)
+                .font(.caption)
+                .fontWeight(.medium)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 6)
+                .frame(maxWidth: .infinity)
+                .background(color.opacity(0.18))
+                .cornerRadius(6)
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
+        }
+        .foregroundColor(color)
     }
 
     /// Per-phase update buttons that immediately push the current form state
@@ -420,6 +594,10 @@ private extension TravelLiveActivityView {
 
     func currentContentState(forcing phase: TravelLiveActivityAttributes.Phase? = nil) -> TravelLiveActivityAttributes.ContentState {
         let p = phase ?? selectedPhase
+        // The boarding/free-text override is allowed on all phases now -
+        // the widget will use it on the status pill regardless of layout.
+        let overrideLabel = boardingStatus.isEmpty ? nil : boardingStatus
+        let resolvedColor = statusColorMode.resolvedHex(custom: customStatusHex)
         return TravelLiveActivityAttributes.ContentState(
             phase: p,
             theme: currentTheme(),
@@ -433,11 +611,14 @@ private extension TravelLiveActivityView {
             journeyProgress: p == .flight ? Int(journeyProgress) : nil,
             wifiAvailable: p == .flight ? wifiAvailable : nil,
             currentLocation: p == .flight ? (currentLocation.isEmpty ? nil : currentLocation) : nil,
-            boardingStatus: (p == .boarding || p == .airport) ? (boardingStatus.isEmpty ? nil : boardingStatus) : nil,
+            boardingStatus: overrideLabel,
             terminal: p == .boarding ? (terminal.isEmpty ? nil : terminal) : nil,
             gate: p == .boarding ? (gate.isEmpty ? nil : gate) : nil,
+            seatNumber: p == .boarding ? (seatNumber.isEmpty ? nil : seatNumber) : nil,
             statusMessage: (p == .boarding || p == .airport) ? (statusMessageField.isEmpty ? nil : statusMessageField) : nil,
-            dwellTimeMessage: p == .airport ? (dwellTimeMessage.isEmpty ? nil : dwellTimeMessage) : nil
+            dwellTimeMessage: p == .airport ? (dwellTimeMessage.isEmpty ? nil : dwellTimeMessage) : nil,
+            journeyStage: selectedJourneyStage,
+            statusColor: resolvedColor
         )
     }
 
@@ -518,6 +699,97 @@ private extension TravelLiveActivityView {
         Task {
             await activity.update(using: currentContentState())
             statusMessage = "Updated activity \(activity.id)"
+            refreshActivities()
+        }
+    }
+
+    /// Configures the form for the requested journey stage (label, colour
+    /// reset to auto so the stage's semantic colour wins, suggested phase,
+    /// and contextual messages) and immediately pushes to every running
+    /// Travel activity. If no activities are running the form is still
+    /// updated so the next "Start Live Activity" tap inherits the scenario.
+    func applyScenario(_ stage: TravelLiveActivityAttributes.JourneyStage) {
+        selectedJourneyStage = stage
+        boardingStatus = ""           // let the stage's defaultLabel drive the pill
+        statusColorMode = .auto       // let the stage's defaultColor drive the pill
+        customStatusHex = ""
+
+        let phase = stage.suggestedPhase
+        selectedPhase = phase
+
+        // Sensible per-stage status messages, dwell tips, and progress.
+        switch stage {
+        case .checkInOpen:
+            statusMessageField = "Online check-in is now open"
+            dwellTimeMessage = "Check in from the app and skip the desk"
+        case .checkedIn:
+            statusMessageField = "Boarding pass ready in your wallet"
+            dwellTimeMessage = "Allow 90 minutes for security"
+        case .goToSecurity:
+            statusMessageField = "Head to security – flight in 90 minutes"
+            dwellTimeMessage = "Liquids in clear bag, devices ready"
+        case .throughSecurity:
+            statusMessageField = "Welcome airside – enjoy your stay"
+            dwellTimeMessage = "Lounge access available on Level 2"
+        case .exploreAirport:
+            statusMessageField = "Gate opens in 90 minutes"
+            dwellTimeMessage = "Visit Al Dahlah Lounge - Level 2"
+        case .goToGate:
+            statusMessageField = "Walk to your gate now – allow 15 mins"
+            dwellTimeMessage = "Your gate is a 12-minute walk away"
+        case .boardingSoon:
+            statusMessageField = "Boarding starts in 15 minutes"
+            dwellTimeMessage = "Final shopping at duty free"
+        case .boardingNow:
+            statusMessageField = "Boarding now at \(gate.isEmpty ? "your gate" : "Gate \(gate)")"
+        case .finalCall:
+            statusMessageField = "Final call – proceed to the gate immediately"
+        case .gateChange:
+            statusMessageField = "Gate changed – please proceed to your new gate"
+        case .gateClosing:
+            statusMessageField = "Gate closing in 5 minutes"
+        case .gateClosed:
+            statusMessageField = "Gate closed – contact a member of staff"
+        case .boarded:
+            statusMessageField = "Welcome onboard – enjoy your flight"
+        case .departed:
+            statusMessageField = "Departed on time"
+            status = "Departed"
+            journeyProgress = 5
+        case .inFlight:
+            statusMessageField = "In flight – enjoy your journey"
+            status = "In Flight"
+            journeyProgress = 50
+        case .landed:
+            statusMessageField = "Welcome – we have landed"
+            status = "Landed"
+            journeyProgress = 100
+        case .arrivedAtGate:
+            statusMessageField = "Arrived at gate – please remain seated"
+            status = "Arrived"
+            journeyProgress = 100
+        case .baggageReady:
+            statusMessageField = "Baggage ready on belt"
+            dwellTimeMessage = "Your bag is on belt 4"
+        case .delayed:
+            statusMessageField = "Flight delayed – we'll keep you posted"
+            timeStatus = "Delayed"
+        case .cancelled:
+            statusMessageField = "Flight cancelled – rebooking options coming"
+            timeStatus = "Cancelled"
+        }
+
+        let activities = Activity<TravelLiveActivityAttributes>.activities
+        guard !activities.isEmpty else {
+            statusMessage = "Form set to '\(stage.defaultLabel)'. Start a Live Activity to see it."
+            return
+        }
+        Task {
+            let state = currentContentState(forcing: phase)
+            for activity in activities {
+                await activity.update(using: state)
+            }
+            statusMessage = "Pushed scenario '\(stage.defaultLabel)' to \(activities.count) activity(ies)"
             refreshActivities()
         }
     }

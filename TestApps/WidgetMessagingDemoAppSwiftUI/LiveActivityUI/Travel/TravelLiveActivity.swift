@@ -84,6 +84,8 @@ struct TravelLiveActivity: Widget {
     @ViewBuilder
     private func expandedBottom(for context: ActivityViewContext<TravelLiveActivityAttributes>) -> some View {
         let theme = context.state.theme
+        let pillColor = context.state.effectiveStatusColor
+        let pillLabel = context.state.effectiveStatusLabel
         switch context.state.phase {
         case .flight:
             HStack {
@@ -95,13 +97,15 @@ struct TravelLiveActivity: Widget {
                         .foregroundColor(theme.accentColor)
                 }
                 Spacer()
-                if let status = context.state.status {
-                    Text(status)
+                if let pillLabel {
+                    Text(pillLabel)
                         .font(.subheadline)
+                        .fontWeight(.semibold)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
-                        .background(theme.accentColor.opacity(0.4))
+                        .background(pillColor)
                         .cornerRadius(6)
+                        .foregroundColor(theme.foregroundColor)
                 }
                 Spacer()
                 VStack(alignment: .trailing) {
@@ -115,11 +119,15 @@ struct TravelLiveActivity: Widget {
             .foregroundColor(theme.foregroundColor)
         case .boarding:
             VStack(spacing: 4) {
-                if let boarding = context.state.boardingStatus {
-                    Text(boarding)
+                if let pillLabel {
+                    Text(pillLabel)
                         .font(.subheadline)
                         .fontWeight(.semibold)
-                        .foregroundColor(theme.accentColor)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(pillColor)
+                        .cornerRadius(6)
+                        .foregroundColor(theme.foregroundColor)
                 }
                 if let message = context.state.statusMessage {
                     Text(message)
@@ -129,11 +137,15 @@ struct TravelLiveActivity: Widget {
             }
         case .airport:
             VStack(spacing: 4) {
-                if let boarding = context.state.boardingStatus {
-                    Text(boarding)
+                if let pillLabel {
+                    Text(pillLabel)
                         .font(.subheadline)
                         .fontWeight(.semibold)
-                        .foregroundColor(theme.accentColor)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(pillColor)
+                        .cornerRadius(6)
+                        .foregroundColor(theme.foregroundColor)
                 }
                 if let dwell = context.state.dwellTimeMessage {
                     Text(dwell)
@@ -207,6 +219,8 @@ private struct TravelFlightContent: View {
 
     var body: some View {
         let theme = context.state.theme
+        let pillLabel = context.state.effectiveStatusLabel
+        let pillColor = context.state.effectiveStatusColor
         VStack(spacing: 8) {
             HStack {
                 Text(context.state.flightNumber ?? "")
@@ -214,13 +228,13 @@ private struct TravelFlightContent: View {
                     .fontWeight(.bold)
                     .foregroundColor(theme.foregroundColor)
                 Spacer()
-                if let status = context.state.status {
-                    Text(status)
+                if let pillLabel {
+                    Text(pillLabel)
                         .font(.caption)
                         .fontWeight(.semibold)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
-                        .background(theme.accentColor.opacity(0.55))
+                        .background(pillColor)
                         .cornerRadius(4)
                         .foregroundColor(theme.foregroundColor)
                 }
@@ -285,6 +299,8 @@ private struct TravelBoardingContent: View {
 
     var body: some View {
         let theme = context.state.theme
+        let pillLabel = context.state.effectiveStatusLabel
+        let pillColor = context.state.effectiveStatusColor
         VStack(spacing: 8) {
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
@@ -297,13 +313,13 @@ private struct TravelBoardingContent: View {
                         .foregroundColor(theme.foregroundColor.opacity(0.8))
                 }
                 Spacer()
-                if let boarding = context.state.boardingStatus {
-                    Text(boarding)
+                if let pillLabel {
+                    Text(pillLabel)
                         .font(.caption)
                         .fontWeight(.semibold)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
-                        .background(theme.accentColor)
+                        .background(pillColor)
                         .cornerRadius(4)
                         .foregroundColor(theme.foregroundColor)
                 }
@@ -315,6 +331,9 @@ private struct TravelBoardingContent: View {
                 }
                 if let gate = context.state.gate {
                     boardingPill(label: "Gate", value: gate, theme: theme)
+                }
+                if let seat = context.state.seatNumber {
+                    boardingPill(label: "Seat", value: seat, theme: theme)
                 }
                 if let time = context.state.departureTime {
                     boardingPill(label: "Departs", value: time, theme: theme)
@@ -348,6 +367,8 @@ private struct TravelAirportContent: View {
 
     var body: some View {
         let theme = context.state.theme
+        let pillLabel = context.state.effectiveStatusLabel
+        let pillColor = context.state.effectiveStatusColor
         VStack(spacing: 6) {
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
@@ -360,13 +381,13 @@ private struct TravelAirportContent: View {
                         .foregroundColor(theme.foregroundColor.opacity(0.8))
                 }
                 Spacer()
-                if let boarding = context.state.boardingStatus {
-                    Text(boarding)
+                if let pillLabel {
+                    Text(pillLabel)
                         .font(.caption)
                         .fontWeight(.semibold)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
-                        .background(theme.accentColor)
+                        .background(pillColor)
                         .cornerRadius(4)
                         .foregroundColor(theme.foregroundColor)
                 }

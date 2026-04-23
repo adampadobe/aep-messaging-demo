@@ -48,6 +48,110 @@ struct TravelLiveActivityAttributes: LiveActivityAttributes {
         let onBackground: String?           // optional, defaults to "#FFFFFF"
     }
 
+    /// Comprehensive enumeration of journey stages for a travel companion
+    /// experience. Covers the natural flow from check-in through arrival.
+    /// Each stage has a default display label and a default semantic color
+    /// (red / amber / green / blue) used by the status pill — the payload
+    /// can override either via `boardingStatus` (free text) or `statusColor`
+    /// (hex). Order of cases is the natural travel order, used for the
+    /// presenter UI picker.
+    enum JourneyStage: String, Codable, Hashable, CaseIterable {
+        // Pre-airport
+        case checkInOpen     = "checkInOpen"
+        case checkedIn       = "checkedIn"
+        // Security & airside
+        case goToSecurity    = "goToSecurity"
+        case throughSecurity = "throughSecurity"
+        case exploreAirport  = "exploreAirport"
+        case goToGate        = "goToGate"
+        // Gate / boarding
+        case boardingSoon    = "boardingSoon"
+        case boardingNow     = "boardingNow"
+        case finalCall       = "finalCall"
+        case gateChange      = "gateChange"
+        case gateClosing     = "gateClosing"
+        case gateClosed      = "gateClosed"
+        case boarded         = "boarded"
+        // Flight
+        case departed        = "departed"
+        case inFlight        = "inFlight"
+        case landed          = "landed"
+        // Arrival
+        case arrivedAtGate   = "arrivedAtGate"
+        case baggageReady    = "baggageReady"
+        // Disruption (can occur at any time)
+        case delayed         = "delayed"
+        case cancelled       = "cancelled"
+
+        /// Default label shown on the status pill when `boardingStatus` is
+        /// not provided.
+        var defaultLabel: String {
+            switch self {
+            case .checkInOpen:     return "Check-in Open"
+            case .checkedIn:       return "Checked In"
+            case .goToSecurity:    return "Go to Security"
+            case .throughSecurity: return "Through Security"
+            case .exploreAirport:  return "Explore Airport"
+            case .goToGate:        return "Go to Gate"
+            case .boardingSoon:    return "Boarding Soon"
+            case .boardingNow:     return "Boarding Now"
+            case .finalCall:       return "Final Call"
+            case .gateChange:      return "Gate Change"
+            case .gateClosing:     return "Gate Closing"
+            case .gateClosed:      return "Gate Closed"
+            case .boarded:         return "Boarded"
+            case .departed:        return "Departed"
+            case .inFlight:        return "In Flight"
+            case .landed:          return "Landed"
+            case .arrivedAtGate:   return "At Gate"
+            case .baggageReady:    return "Baggage Ready"
+            case .delayed:         return "Delayed"
+            case .cancelled:       return "Cancelled"
+            }
+        }
+
+        /// Default semantic-color hex for the status pill background.
+        /// Overridable via the `statusColor` field in `ContentState`.
+        ///
+        ///   • Red   – urgent / negative (gate closing, cancelled, delayed)
+        ///   • Amber – needs attention   (boarding soon, gate change, final call, go-to-gate)
+        ///   • Green – positive          (boarding now, boarded, checked in, landed, baggage ready)
+        ///   • Blue  – informational     (check-in open, in-flight, departed, security, explore)
+        var defaultColorHex: String {
+            switch self {
+            // Red
+            case .gateClosing, .gateClosed, .cancelled:
+                return "#E53935"
+            // Amber / orange
+            case .gateChange, .boardingSoon, .finalCall, .goToGate, .delayed:
+                return "#F39C12"
+            // Green
+            case .boardingNow, .boarded, .checkedIn, .throughSecurity, .landed, .baggageReady, .arrivedAtGate:
+                return "#27AE60"
+            // Blue
+            case .checkInOpen, .goToSecurity, .exploreAirport, .departed, .inFlight:
+                return "#2D7AB8"
+            }
+        }
+
+        /// Suggested phase layout for the activity when this stage fires.
+        /// Used as a fallback when the payload doesn't pin a `phase` —
+        /// keeps the UI's "Quick scenario" buttons short.
+        var suggestedPhase: Phase {
+            switch self {
+            case .checkInOpen, .checkedIn, .goToSecurity, .throughSecurity,
+                 .exploreAirport, .goToGate:
+                return .airport
+            case .boardingSoon, .boardingNow, .finalCall, .gateChange,
+                 .gateClosing, .gateClosed, .boarded:
+                return .boarding
+            case .departed, .inFlight, .landed, .arrivedAtGate, .baggageReady,
+                 .delayed, .cancelled:
+                return .flight
+            }
+        }
+    }
+
     /// Mutable content. All route metadata lives here so push updates can
     /// change phase, colors, route or schedule mid-activity.
     struct ContentState: Codable, Hashable {
@@ -69,13 +173,25 @@ struct TravelLiveActivityAttributes: LiveActivityAttributes {
         let currentLocation: String?
 
         // phase = .boarding
-        let boardingStatus: String?         // "Check-in Open" .. "Departed"
+        let boardingStatus: String?         // free-text label, wins over `journeyStage.defaultLabel`
         let terminal: String?
         let gate: String?
+        let seatNumber: String?             // e.g. "12A"
         let statusMessage: String?          // e.g. "Terminal A - Gate D4B"
 
         // phase = .airport
         let dwellTimeMessage: String?       // e.g. "Visit Al Dahlah Lounge - Level 2"
+
+        // Cross-phase journey companion
+        /// Optional, payload-driven journey stage. When present the status
+        /// pill auto-picks a default label + color, overridable by
+        /// `boardingStatus` and `statusColor`.
+        let journeyStage: JourneyStage?
+
+        /// Optional hex (e.g. "#E53935") that overrides the per-stage
+        /// default color of the status pill background. Useful for
+        /// brand-specific palettes that still need urgent-red moments.
+        let statusColor: String?
     }
 }
 
@@ -115,8 +231,11 @@ extension TravelLiveActivityAttributes: LiveActivityAssuranceDebuggable {
             boardingStatus: nil,
             terminal: nil,
             gate: nil,
+            seatNumber: nil,
             statusMessage: nil,
-            dwellTimeMessage: nil
+            dwellTimeMessage: nil,
+            journeyStage: .departed,
+            statusColor: nil
         )
     }
 
@@ -134,11 +253,14 @@ extension TravelLiveActivityAttributes: LiveActivityAssuranceDebuggable {
             journeyProgress: nil,
             wifiAvailable: nil,
             currentLocation: nil,
-            boardingStatus: "Boarding now",
+            boardingStatus: nil,
             terminal: "Terminal A",
             gate: "D4B",
+            seatNumber: "12A",
             statusMessage: "Terminal A - Gate D4B",
-            dwellTimeMessage: nil
+            dwellTimeMessage: nil,
+            journeyStage: .boardingNow,
+            statusColor: nil
         )
     }
 
@@ -156,11 +278,14 @@ extension TravelLiveActivityAttributes: LiveActivityAssuranceDebuggable {
             journeyProgress: nil,
             wifiAvailable: nil,
             currentLocation: nil,
-            boardingStatus: "Explore Airport",
+            boardingStatus: nil,
             terminal: "Terminal A",
             gate: "D4B",
+            seatNumber: "12A",
             statusMessage: "Gate opens in 90 minutes",
-            dwellTimeMessage: "Visit Al Dahlah Lounge - Level 2"
+            dwellTimeMessage: "Visit Al Dahlah Lounge - Level 2",
+            journeyStage: .exploreAirport,
+            statusColor: nil
         )
     }
 }

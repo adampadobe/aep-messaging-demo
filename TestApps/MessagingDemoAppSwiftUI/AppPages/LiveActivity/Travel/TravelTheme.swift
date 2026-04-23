@@ -37,6 +37,40 @@ extension TravelLiveActivityAttributes.Theme {
     }
 }
 
+/// Helpers for resolving the *effective* status pill displayed on every
+/// Live Activity layout. Resolution order:
+///   1. `boardingStatus` free-text   ← payload override (label)
+///   2. `journeyStage.defaultLabel`  ← canonical stage label
+///   3. `status` (flight phase)      ← legacy free-text status
+///
+/// Color resolution order:
+///   1. `statusColor` hex            ← payload override
+///   2. `journeyStage.defaultColor`  ← stage's semantic color
+///   3. `theme.accentColor`          ← theme fallback
+@available(iOS 16.1, *)
+extension TravelLiveActivityAttributes.ContentState {
+
+    /// Best label to render in the status pill, or `nil` if nothing was set.
+    var effectiveStatusLabel: String? {
+        if let s = boardingStatus, !s.isEmpty { return s }
+        if let stage = journeyStage { return stage.defaultLabel }
+        if let s = status, !s.isEmpty { return s }
+        return nil
+    }
+
+    /// Best color for the status pill background. Falls back to the theme's
+    /// accent so legacy payloads keep their look.
+    var effectiveStatusColor: Color {
+        if let hex = statusColor, !hex.isEmpty, let color = Color(hex: hex) {
+            return color
+        }
+        if let stage = journeyStage, let color = Color(hex: stage.defaultColorHex) {
+            return color
+        }
+        return theme.accentColor
+    }
+}
+
 extension Color {
 
     /// Initializes a `Color` from a hex string. Supports `#RRGGBB`, `#AARRGGBB`,
