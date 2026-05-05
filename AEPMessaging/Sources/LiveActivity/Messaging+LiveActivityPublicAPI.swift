@@ -14,10 +14,10 @@
     import ActivityKit
 #endif
 
-import Foundation
 import AEPCore
 import AEPMessagingLiveActivity
 import AEPServices
+import Foundation
 
 // Extension for Messaging class for Live Activity public APIs
 @available(iOS 16.1, *)

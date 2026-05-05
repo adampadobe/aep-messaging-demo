@@ -20,10 +20,11 @@ let package = Package(
     platforms: [.iOS(.v12)],
     products: [
         .library(name: "AEPMessaging", targets: ["AEPMessaging"]),
-        .library(name: "AEPMessagingLiveActivity", targets: ["AEPMessagingLiveActivity"])
+        .library(name: "AEPMessagingLiveActivity", targets: ["AEPMessagingLiveActivity"]),
+        .library(name: "AEPMessagingNotification", targets: ["AEPMessagingNotification"])
     ],
     dependencies: [
-        .package(url: "https://github.com/adobe/aepsdk-core-ios.git", .upToNextMajor(from: "5.7.0")),
+        .package(url: "https://github.com/adobe/aepsdk-core-ios.git", .upToNextMajor(from: "5.8.0")),
         .package(url: "https://github.com/adobe/aepsdk-edge-ios.git", .upToNextMajor(from: "5.0.2")),
         .package(url: "https://github.com/adobe/aepsdk-edgeidentity-ios.git", .upToNextMajor(from: "5.0.0"))
     ],
@@ -42,6 +43,10 @@ let package = Package(
         .target(
             name: "AEPMessagingLiveActivity",
             path: "AEPMessagingLiveActivity/Sources/"
+        ),
+        .target(
+            name: "AEPMessagingNotification",
+            path: "AEPMessagingNotification/Sources/"
         )
     ]
 )

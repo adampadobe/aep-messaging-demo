@@ -34,6 +34,12 @@ struct HomeView: View {
                 .tabItem {
                     Label("Cards", systemImage: "tray.and.arrow.down.fill")
                 }
+            if #available(iOS 15.0, *) {
+                InboxView()
+                    .tabItem {
+                        Label("Inbox", systemImage: "tray.fill")
+                    }
+            }
             if #available(iOS 16.1, *) {
                 LiveActivityView()
                     .tabItem {

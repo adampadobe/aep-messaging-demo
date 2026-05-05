@@ -28,10 +28,12 @@ enum Constants {
     // To auto-connect on launch, paste your Assurance session URL here:
     // Get URL from: https://experience.adobe.com/assurance (Create Session)
     // Example: "messagingdemo://?adb_validation_sessionid=YOUR_SESSION_ID"
-    static let assuranceURL = "messagingdemo://?adb_validation_sessionid=337dbb92-042f-4b57-9cc6-13e252c33e86"
+    static let assuranceURL = "messagingdemo://?adb_validation_sessionid=YOUR_SESSION_ID"
     
-    // Surface Names
+    // Surface Names (must match Adobe Journey Optimizer channel / code-based experience paths)
     enum SurfaceName {
+        /// AJO Messaging Inbox surface — align with your Inbox channel in AJO (see Adobe Inbox UI tutorial).
+        static let INBOX = "inbox"
         static let CONTENT_CARD = "cardstab"
         //static let CONTENT_CARD = "largeImageCards"
         static let CBE_HTML = "cbehtml"

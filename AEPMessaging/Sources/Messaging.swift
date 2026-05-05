@@ -107,6 +107,13 @@ public class Messaging: NSObject, Extension {
         set { queue.async { self._qualifiedContentCardsBySurface = newValue } }
     }
 
+    /// holds inbox propositions (container-item) for each surface
+    private var _inboxPropositionsBySurface: [Surface: [Proposition]] = [:]
+    var inboxPropositionsBySurface: [Surface: [Proposition]] {
+        get { queue.sync { self._inboxPropositionsBySurface } }
+        set { queue.async { self._inboxPropositionsBySurface = newValue } }
+    }
+
     /// Messaging state manager (push identifier + live activity state)
     private var stateManager = MessagingStateManager()
 
@@ -117,17 +124,26 @@ public class Messaging: NSObject, Extension {
     static let supportedSchemas = [
         MessagingConstants.PersonalizationSchemas.HTML_CONTENT,
         MessagingConstants.PersonalizationSchemas.JSON_CONTENT,
-        MessagingConstants.PersonalizationSchemas.RULESET_ITEM
+        MessagingConstants.PersonalizationSchemas.RULESET_ITEM,
+        MessagingConstants.PersonalizationSchemas.INBOX
     ]
 
     // MARK: - Extension protocol methods
 
+    /// Interceptor for handling rule re-evaluation when reevaluable rules are triggered.
+    /// Uses the shared RefreshInAppHandler for deduplication of refresh requests.
+    private let reevaluationInterceptor = MessagingRuleEngineInterceptor()
+    
     public required init?(runtime: ExtensionRuntime) {
         self.runtime = runtime
         MessagingMigrator.migrate(cache: cache)
         rulesEngine = MessagingRulesEngine(name: MessagingConstants.RULES_ENGINE_NAME, extensionRuntime: runtime, cache: cache)
         contentCardRulesEngine = ContentCardRulesEngine(name: MessagingConstants.CONTENT_CARD_RULES_ENGINE_NAME, extensionRuntime: runtime)
         super.init()
+        
+        // Register the reevaluation interceptor to handle dynamic rule updates
+        rulesEngine.launchRulesEngine.setReevaluationInterceptor(reevaluationInterceptor)
+        
         loadCachedPropositions()
     }
 
@@ -140,6 +156,10 @@ public class Messaging: NSObject, Extension {
         self.cache = cache
         self.stateManager = stateManager
         super.init()
+        
+        // Register the reevaluation interceptor to handle dynamic rule updates
+        rulesEngine.launchRulesEngine.setReevaluationInterceptor(reevaluationInterceptor)
+        
         loadCachedPropositions()
     }
 
@@ -278,6 +298,10 @@ public class Messaging: NSObject, Extension {
         // handle an event for refreshing in-app messages from the remote
         if event.isRefreshMessageEvent {
             Log.debug(label: MessagingConstants.LOG_TAG, "Processing manual request to refresh In-App Message definitions from the remote.")
+            // Register completion handler that notifies RefreshInAppHandler when done
+            Messaging.completionHandlers.append(CompletionHandler(originatingEvent: event) { success in
+                RefreshInAppHandler.shared.handleRefreshComplete(success: success)
+            })
             fetchPropositions(event)
             return
         }
@@ -644,6 +668,59 @@ public class Messaging: NSObject, Extension {
         }
     }
 
+    /// Authoritatively refreshes the content card cache using the response from a personalization network request.
+    ///
+    /// Called after a personalization response stream completes. Treats the response as the source of truth
+    /// for the requested surfaces:
+    /// - Any requested surface that returned no qualified propositions is removed from cache, preventing stale
+    ///   cards from persisting after a server-side change.
+    /// - For surfaces that did return propositions, the cached list is fully replaced (not merged) with the new results.
+    /// - Propositions that are new (not previously in the cache) generate a `trigger` event sent to Edge Network.
+    ///
+    /// - Parameters:
+    ///   - qualifiedContentCards: The propositions keyed by surface, as returned by the content card rules engine.
+    ///   - requestedSurfaces: The surfaces that were included in the originating personalization request;
+    ///     used to identify surfaces that should be cleared if absent from the response.
+    private func removeOrReplaceContentCards(_ qualifiedContentCards: [Surface: [Proposition]], requestedSurfaces: [Surface]) {
+        // Evict requested surfaces that returned no qualified propositions
+        for surface in requestedSurfaces {
+            if qualifiedContentCards[surface] == nil {
+                qualifiedContentCardsBySurface.removeValue(forKey: surface)
+            }
+        }
+
+        // Fully replace cached propositions for surfaces that have qualified content cards
+        for (surface, propositions) in qualifiedContentCards {
+            let existingPropositions = qualifiedContentCardsBySurface[surface] ?? []
+            let startingCount = existingPropositions.count
+
+            var newPropositionsToTrack: [PropositionItem] = []
+            for proposition in propositions {
+                if !existingPropositions.contains(proposition) {
+                    if let item = proposition.items.first {
+                        newPropositionsToTrack.append(item)
+                    }
+                }
+            }
+
+            // Replace the cached list entirely with the fresh response data
+            qualifiedContentCardsBySurface[surface] = propositions
+
+            if !newPropositionsToTrack.isEmpty {
+                newPropositionsToTrack.track(withEdgeEventType: .trigger)
+            }
+
+            let newCount = propositions.count
+            if startingCount != newCount {
+                if newCount > 0 {
+                    Log.trace(label: MessagingConstants.LOG_TAG, "User has qualified for \(newCount) content card(s) for surface \(surface.uri).")
+                } else {
+                    Log.trace(label: MessagingConstants.LOG_TAG, "User has not qualified for any content cards for surface \(surface.uri).")
+                }
+            }
+        }
+    }
+
     /// Removes the `Proposition` from `qualifiedContentCardsBySurface` based on provided `activityId`.
     ///
     /// - Parameter activityId: the activityId of the `Proposition` to be removed from cache.
@@ -744,6 +821,11 @@ public class Messaging: NSObject, Extension {
                 // response event failed or timed out, need to remove this event from the queue
                 self.requestedSurfacesForEventId.removeValue(forKey: newEvent.id.uuidString)
                 self.eventsQueue.start()
+
+                // Call completion handler with failure so callers know the request failed
+                if let handler = self.completionHandlerFor(edgeRequestEventId: newEvent.id) {
+                    handler.handle?(false)
+                }
 
                 Log.warning(label: MessagingConstants.LOG_TAG, "Unable to run completion logic for a personalization request event - unable to obtain parent event ID")
                 return
@@ -877,6 +959,7 @@ public class Messaging: NSObject, Extension {
         // persistence we will be removing empty surfaces and making sure unrequested surfaces
         // continue to have their rules active
         updatePropositions(parsedPropositions.propositionsToCache, removing: surfacesToRemove)
+        updateInboxPropositions(parsedPropositions.inboxPropositionsToCache, removing: surfacesToRemove)
         updatePropositionInfo(parsedPropositions.propositionInfoToCache, removing: surfacesToRemove)
         cache.updatePropositions(parsedPropositions.propositionsToPersist, removing: surfacesToRemove)
 
@@ -890,34 +973,30 @@ public class Messaging: NSObject, Extension {
         processRulesForSchemaType(.contentCard, surfaceRulesBySchemaType: surfaceRulesBySchemaType, requestedSurfaces: requestedSurfaces, rulesBySurface: &contentCardRulesBySurface)
         processRulesForSchemaType(.eventHistoryOperation, surfaceRulesBySchemaType: surfaceRulesBySchemaType, requestedSurfaces: requestedSurfaces, rulesBySurface: &eventHistoryRulesBySurface)
 
-        // Content card rules engine
-        if surfaceRulesBySchemaType[.contentCard] != nil {
-            let collectedContentCardRules = collectRules(from: contentCardRulesBySurface)
-            contentCardRulesEngine.launchRulesEngine.replaceRules(with: collectedContentCardRules)
+        // Content card rules engine: always sync from `contentCardRulesBySurface` and refresh the qualified cache.
+        // `processRulesForSchemaType` clears rules for requested surfaces when `.contentCard` is absent from the
+        // response (e.g. campaign removed server-side); we must still replace rules and call `removeOrReplaceContentCards`
+        // in that case — not only when the key is present with an empty map.
+        let collectedContentCardRules = collectRules(from: contentCardRulesBySurface)
+        contentCardRulesEngine.launchRulesEngine.replaceRules(with: collectedContentCardRules)
 
-            // Seed content cards qualification
-            let seedEvent = Event(name: "Seed content cards", type: EventType.messaging, source: EventSource.requestContent, data: nil)
-            let qualified = getPropositionsFromContentCardRulesEngine(seedEvent)
-            for (surface, propositions) in qualified {
-                addOrReplaceContentCards(propositions, forSurface: surface)
-            }
+        let seedEvent = Event(name: "Seed content cards", type: EventType.messaging, source: EventSource.requestContent, data: nil)
+        let qualified = getPropositionsFromContentCardRulesEngine(seedEvent)
+        removeOrReplaceContentCards(qualified, requestedSurfaces: requestedSurfaces)
+
+        // Always sync the in-app + event history rules engine, for the same reason as content
+        // cards above: processRulesForSchemaType already cleared stale entries from
+        // inAppRulesBySurface / eventHistoryRulesBySurface, and the engine must reflect that.
+        let collectedInAppRules = collectRules(from: inAppRulesBySurface)
+
+        // Prefetch assets only when the response actually contained new in-app rules
+        if surfaceRulesBySchemaType[.inapp] != nil {
+            rulesEngine.cacheRemoteAssetsFor(collectedInAppRules)
         }
 
-        // In-app + event history rules engine
-        if surfaceRulesBySchemaType[.inapp] != nil || surfaceRulesBySchemaType[.eventHistoryOperation] != nil {
-            let collectedInAppRules = collectRules(from: inAppRulesBySurface)
-
-            // Prefetch assets only if we actually received in-app rules this time
-            if surfaceRulesBySchemaType[.inapp] != nil {
-                rulesEngine.cacheRemoteAssetsFor(collectedInAppRules)
-            }
-
-            // Combine in-app + event history rules
-            var combined = collectedInAppRules
-            combined.append(contentsOf: collectRules(from: eventHistoryRulesBySurface))
-
-            rulesEngine.launchRulesEngine.replaceRules(with: combined)
-        }
+        var combined = collectedInAppRules
+        combined.append(contentsOf: collectRules(from: eventHistoryRulesBySurface))
+        rulesEngine.launchRulesEngine.replaceRules(with: combined)
     }
 
     private func processRulesForSchemaType(
@@ -965,9 +1044,15 @@ public class Messaging: NSObject, Extension {
         // get requested propositions (cbe) from cache
         let requestedPropositions = retrieveCachedPropositions(for: requestedSurfaces)
 
-        // merge the two maps
+        // get requested inbox propositions from cache
+        let requestedInboxPropositions = inboxPropositionsBySurface.filter { surfaces.contains($0.key) }
+
+        // merge the three maps
         var mergedPropositions = requestedContentCards
         for (surface, propositions) in requestedPropositions {
+            mergedPropositions.addArray(propositions, forKey: surface)
+        }
+        for (surface, propositions) in requestedInboxPropositions {
             mergedPropositions.addArray(propositions, forKey: surface)
         }
 
@@ -1108,6 +1193,10 @@ public class Messaging: NSObject, Extension {
 
         func callUpdateRulesEngines(with rules: [SchemaType: [Surface: [LaunchRule]]], requestedSurfaces: [Surface]) {
             updateRulesEngines(with: rules, requestedSurfaces: requestedSurfaces)
+        }
+
+        func callRemoveOrReplaceContentCards(_ qualifiedContentCards: [Surface: [Proposition]], requestedSurfaces: [Surface]) {
+            removeOrReplaceContentCards(qualifiedContentCards, requestedSurfaces: requestedSurfaces)
         }
     #endif
 }

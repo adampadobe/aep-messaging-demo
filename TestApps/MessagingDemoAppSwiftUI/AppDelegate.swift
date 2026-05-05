@@ -78,7 +78,8 @@ final class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCent
         let cardSurface = Surface(path: Constants.SurfaceName.CONTENT_CARD)
         let cbeSurface1 = Surface(path: Constants.SurfaceName.CBE_HTML)
         let cbeSurface2 = Surface(path: Constants.SurfaceName.CBE_JSON)
-        Messaging.updatePropositionsForSurfaces([cardSurface, cbeSurface1, cbeSurface2])
+        let inboxSurface = Surface(path: Constants.SurfaceName.INBOX)
+        Messaging.updatePropositionsForSurfaces([cardSurface, cbeSurface1, cbeSurface2, inboxSurface])
     }
 
     // MARK: - Push Notification registration methods
