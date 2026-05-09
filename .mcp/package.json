@@ -1,0 +1,13 @@
+{
+  "name": "aep-messaging-xcode-mcp",
+  "version": "1.0.0",
+  "description": "Local MCP server for AEP Messaging iOS demo app — device deploy, git, and diagnostics",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  }
+}

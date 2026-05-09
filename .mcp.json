@@ -3,6 +3,10 @@
     "xcodebuildmcp": {
       "command": "/opt/homebrew/bin/npx",
       "args": ["-y", "xcodebuildmcp@latest", "mcp"]
+    },
+    "aep-xcode": {
+      "command": "node",
+      "args": [".mcp/server.js"]
     }
   }
 }
