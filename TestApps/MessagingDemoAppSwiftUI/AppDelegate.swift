@@ -31,6 +31,17 @@ final class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCent
     /// QR / deep link received before the first configuration response with `experienceCloud.org`.
     private var pendingAssuranceDeepLinkURL: URL?
 
+    /// Guards against calling lifecycleStart before EdgeBridge is registered.
+    /// SwiftUI scenePhase.active can fire on cold launch before registerExtensions completes,
+    /// which would cause EdgeBridge to miss the lifecycle event entirely.
+    /// Set to true inside the registerExtensions callback; the callback also fires lifecycleStart
+    /// if the scene already became active before registration finished.
+    var extensionsRegistered = false
+
+    /// Set to true when scenePhase becomes .active. If extensions aren't ready yet,
+    /// the registerExtensions callback will call lifecycleStart instead.
+    var sceneIsActive = false
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         MobileCore.setLogLevel(.trace)
 
@@ -109,6 +120,15 @@ final class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCent
                             KSIAAirportAttributes.self,
                             TravelLiveActivityAttributes.self
                         ])
+                    }
+
+                    // Mark extensions as registered. If scenePhase already fired .active
+                    // before we got here (common on cold launch), kick off lifecycleStart now
+                    // so EdgeBridge is guaranteed to be listening. The SDK deduplicates within
+                    // the same 24-hour session, so a second call from scenePhase is harmless.
+                    self.extensionsRegistered = true
+                    if self.sceneIsActive {
+                        MobileCore.lifecycleStart(additionalContextData: nil)
                     }
                 }
             }

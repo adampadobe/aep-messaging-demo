@@ -45,9 +45,16 @@ struct MessagingDemoAppSwiftUIApp: App {
                     MobileCore.lifecyclePause()
                 case .active:
                     print("Scene phase changed to active.")
-                    // Defer so first frame can render without blocking
-                    DispatchQueue.main.async {
-                        MobileCore.lifecycleStart(additionalContextData: nil)
+                    // Record that the scene is active. If extensions are already registered,
+                    // call lifecycleStart immediately (background→foreground resume).
+                    // If registration is still in progress (cold launch race), the
+                    // registerExtensions callback will fire lifecycleStart once EdgeBridge
+                    // is listening. This prevents EdgeBridge from missing the launch event.
+                    delegate.sceneIsActive = true
+                    if delegate.extensionsRegistered {
+                        DispatchQueue.main.async {
+                            MobileCore.lifecycleStart(additionalContextData: nil)
+                        }
                     }
                 case .inactive:
                     print("Scene phase changed to inactive.")
