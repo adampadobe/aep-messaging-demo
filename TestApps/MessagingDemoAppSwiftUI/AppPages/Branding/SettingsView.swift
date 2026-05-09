@@ -141,11 +141,13 @@ struct BrandIconThumbnail: View {
 
     private var placeholderColor: Color {
         switch brand {
-        case .default: return Color(red: 0.93, green: 0.0, blue: 0.0)
-        case .etihad:  return Color(red: 0.78, green: 0.55, blue: 0.20)
-        case .ksia:    return Color(red: 0.05, green: 0.32, blue: 0.20)
-        case .flynas:  return Color(red: 0.96, green: 0.62, blue: 0.04)
-        case .travel:  return Color(red: 0.06, green: 0.49, blue: 0.28)
+        case .default:    return Color(red: 0.93, green: 0.0,  blue: 0.0)   // Adobe red
+        case .etihad:     return Color(red: 0.78, green: 0.55, blue: 0.20)  // Etihad gold
+        case .ksia:       return Color(red: 0.05, green: 0.32, blue: 0.20)  // KSIA green
+        case .claws:      return Color(red: 0.18, green: 0.16, blue: 0.42)  // Claw & Order navy
+        case .nfl:        return Color(red: 0.65, green: 0.12, blue: 0.10)  // NFL red
+        case .stormwings: return Color(red: 0.10, green: 0.10, blue: 0.10)  // Stormwings dark
+        case .hungry:     return Color(red: 0.96, green: 0.75, blue: 0.04)  // Hungry yellow
         }
     }
 }

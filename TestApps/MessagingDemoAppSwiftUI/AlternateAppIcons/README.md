@@ -7,17 +7,17 @@ on the `MessagingDemoAppSwiftUI` target via a folder reference in the
 Xcode project — meaning **anything you drop here is automatically
 bundled**, no Xcode editing required.
 
-## Required file names
+## Current brands
 
-For each brand the picker needs **two** PNGs (60pt iPhone @2x and @3x).
-iPad is optional but recommended (76pt @2x = 152, plus 83.5pt @2x = 167).
-
-| Brand   | Required (iPhone)                                  | Optional (iPad)                                               |
-|---------|----------------------------------------------------|---------------------------------------------------------------|
-| Etihad  | `AppIcon-Etihad@2x.png` (120×120)<br>`AppIcon-Etihad@3x.png` (180×180) | `AppIcon-Etihad@2x~ipad.png` (152×152)<br>`AppIcon-Etihad~ipadpro.png` (167×167) |
-| KSIA    | `AppIcon-KSIA@2x.png` (120×120)<br>`AppIcon-KSIA@3x.png` (180×180)     | `AppIcon-KSIA@2x~ipad.png` (152×152)<br>`AppIcon-KSIA~ipadpro.png` (167×167)     |
-| Flynas  | `AppIcon-Flynas@2x.png` (120×120)<br>`AppIcon-Flynas@3x.png` (180×180) | `AppIcon-Flynas@2x~ipad.png` (152×152)<br>`AppIcon-Flynas~ipadpro.png` (167×167) |
-| Travel  | `AppIcon-Travel@2x.png` (120×120)<br>`AppIcon-Travel@3x.png` (180×180) | `AppIcon-Travel@2x~ipad.png` (152×152)<br>`AppIcon-Travel~ipadpro.png` (167×167) |
+| Brand            | Category      | @2x (120×120)              | @3x (180×180)              |
+|------------------|---------------|----------------------------|----------------------------|
+| Adobe (default)  | —             | `AppIcon` in asset catalog | —                          |
+| Etihad           | Aviation      | `AppIcon-Etihad@2x.png`    | `AppIcon-Etihad@3x.png`    |
+| KSIA             | Aviation      | `AppIcon-KSIA@2x.png`      | `AppIcon-KSIA@3x.png`      |
+| Claw & Order     | Sports        | `AppIcon-Claws@2x.png`     | `AppIcon-Claws@3x.png`     |
+| NFL              | Sports        | `AppIcon-NFL@2x.png`       | `AppIcon-NFL@3x.png`       |
+| Stormwings Eagles| Sports        | `AppIcon-Stormwings@2x.png`| `AppIcon-Stormwings@3x.png`|
+| Hungry           | Food/Retail   | `AppIcon-Hungry@2x.png`    | `AppIcon-Hungry@3x.png`    |
 
 ## Image rules
 
@@ -34,15 +34,31 @@ iPad is optional but recommended (76pt @2x = 152, plus 83.5pt @2x = 167).
 2. Add a `<key>AppIcon-<Name></key>...` block under
    `CFBundleAlternateIcons` (and `CFBundleIcons~ipad → CFBundleAlternateIcons`)
    in `MessagingDemoAppSwiftUI-Info.plist`.
-3. Drop the two `@2x` / `@3x` PNGs in this folder using the same
+3. Add a `placeholderColor` case to `BrandIconThumbnail` in `SettingsView.swift`.
+4. Drop the two `@2x` / `@3x` PNGs in this folder using the same
    `AppIcon-<Name>` base name.
+
+### Quick icon generation (from any source PNG)
+
+```bash
+# Replace <Name> and <source.png> — output goes straight into this folder
+DEST="TestApps/MessagingDemoAppSwiftUI/AlternateAppIcons"
+SRC="path/to/source.png"
+NAME="MyBrand"  # must match iconName in BrandIcon enum
+
+for SIZE in 120 180; do
+  SCALE=$([[ $SIZE == 120 ]] && echo "2x" || echo "3x")
+  ffmpeg -y -i "$SRC" \
+    -vf "scale=${SIZE}:${SIZE}:force_original_aspect_ratio=decrease,pad=${SIZE}:${SIZE}:(ow-iw)/2:(oh-ih)/2:color=white" \
+    -frames:v 1 "${DEST}/AppIcon-${NAME}@${SCALE}.png"
+done
+```
 
 ## Default (Adobe) icon
 
 The `Adobe (default)` choice in the picker uses the primary `AppIcon`
-asset already in `TestApps/MessagingDemoAppSwiftUI/Assets.xcassets/AppIcon.appiconset/`.
-No changes needed there — just make sure the asset has the standard set
-of PNGs filled in (`Edit > Provide All Sizes` in Xcode).
+asset in `TestApps/MessagingDemoAppSwiftUI/Assets.xcassets/AppIcon.appiconset/`.
+The current default is the Adobe Government Forum 2026 icon (vibrant-gradient A).
 
 ## How the picker resolves preview thumbnails
 

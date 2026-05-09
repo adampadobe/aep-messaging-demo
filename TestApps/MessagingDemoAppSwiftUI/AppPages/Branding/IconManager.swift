@@ -22,11 +22,17 @@ import UIKit
 ///   3. Drop the matching PNGs into `AlternateAppIcons/` (see the README in
 ///      that folder for the required file names + sizes).
 enum BrandIcon: String, CaseIterable, Identifiable, Hashable {
+    // Default (Adobe)
     case `default`
+    // Aviation / airports
     case etihad
     case ksia
-    case flynas
-    case travel
+    // Sports
+    case claws
+    case nfl
+    case stormwings
+    // Food & retail
+    case hungry
 
     var id: String { rawValue }
 
@@ -35,11 +41,13 @@ enum BrandIcon: String, CaseIterable, Identifiable, Hashable {
     /// Must match a key under `CFBundleAlternateIcons` in Info.plist.
     var iconName: String? {
         switch self {
-        case .default: return nil
-        case .etihad:  return "AppIcon-Etihad"
-        case .ksia:    return "AppIcon-KSIA"
-        case .flynas:  return "AppIcon-Flynas"
-        case .travel:  return "AppIcon-Travel"
+        case .default:    return nil
+        case .etihad:     return "AppIcon-Etihad"
+        case .ksia:       return "AppIcon-KSIA"
+        case .claws:      return "AppIcon-Claws"
+        case .nfl:        return "AppIcon-NFL"
+        case .stormwings: return "AppIcon-Stormwings"
+        case .hungry:     return "AppIcon-Hungry"
         }
     }
 
@@ -51,11 +59,13 @@ enum BrandIcon: String, CaseIterable, Identifiable, Hashable {
 
     var displayName: String {
         switch self {
-        case .default: return "Adobe (default)"
-        case .etihad:  return "Etihad"
-        case .ksia:    return "KSIA"
-        case .flynas:  return "Flynas"
-        case .travel:  return "Travel"
+        case .default:    return "Adobe (default)"
+        case .etihad:     return "Etihad"
+        case .ksia:       return "KSIA"
+        case .claws:      return "Claw & Order"
+        case .nfl:        return "NFL"
+        case .stormwings: return "Stormwings Eagles"
+        case .hungry:     return "Hungry"
         }
     }
 }

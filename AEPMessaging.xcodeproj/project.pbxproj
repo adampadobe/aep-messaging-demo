@@ -338,7 +338,7 @@
 		B61BD9D12DA4BD16007FE12E /* FoodDeliveryProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61BD9C42DA4BD16007FE12E /* FoodDeliveryProgressView.swift */; };
 		B61BD9D22DA4BD16007FE12E /* GameScoreLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61BD9C62DA4BD16007FE12E /* GameScoreLiveActivity.swift */; };
 		B61BD9D32DA4BD16007FE12E /* WidgetMessagingDemoAppSwiftUIBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61BD9CB2DA4BD16007FE12E /* WidgetMessagingDemoAppSwiftUIBundle.swift */; };
-		B61BDAE72DA5EA43007FE12E /* AEPMessagingLiveActivity.h in Headers */ = {isa = PBXBuildFile; fileRef = B61BDAE12DA5EA43007FE12E /* AEPMessagingLiveActivity.h */; };
+		B61BDAE72DA5EA43007FE12E /* AEPMessagingLiveActivity.h in Headers */ = {isa = PBXBuildFile; fileRef = B61BDAE12DA5EA43007FE12E /* AEPMessagingLiveActivity.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B61BDAE92DA5EA43007FE12E /* LiveActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61BDAE32DA5EA43007FE12E /* LiveActivityAttributes.swift */; };
 		B61BDAEA2DA5EA43007FE12E /* LiveActivityData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61BDAE42DA5EA43007FE12E /* LiveActivityData.swift */; };
 		B631AE162A61336800E8B82E /* MessagingNotificationTrackingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B631AE152A61336800E8B82E /* MessagingNotificationTrackingTests.swift */; };
@@ -470,6 +470,13 @@
 		E09CA04F82054CB4A8AC5D2E /* InboxStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385094F2A3B648BC820CEFA9 /* InboxStateTests.swift */; };
 		E1E1C4D19DDFA98963D58BB5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4E78D9F64A7EAE46F3B8CF3 /* Foundation.framework */; };
 		E2F15A5C1B92033400A07D85 /* EtihadBoardingLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A23F8317AAEBB040AE268E /* EtihadBoardingLiveActivity.swift */; };
+		E8EF5E412FAA7E76005D887B /* EtihadPremiumFlightAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5760AF6F1BFF05AFEAF1F8E2 /* EtihadPremiumFlightAttributes.swift */; };
+		E8EF5E422FAA7E76005D887B /* EtihadBoardingAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD83A2D350B0FE2A8177D8C /* EtihadBoardingAttributes.swift */; };
+		E8EF5E432FAA7E76005D887B /* KSIAAirportAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81E7F07946CF38A6D273421 /* KSIAAirportAttributes.swift */; };
+		E8EF5E442FAA7E76005D887B /* FlynasFlightAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145E8C0CC8F53B5E00EA1D50 /* FlynasFlightAttributes.swift */; };
+		E8EF5E452FAA7E76005D887B /* TravelLiveActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CA43E1EBEABAA1056A0C2D /* TravelLiveActivityAttributes.swift */; };
+		E8EF5E462FAA7E76005D887B /* TravelLogoCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B787D3AEC0B4FCFC639C3C59 /* TravelLogoCache.swift */; };
+		E8EF5E472FAA7E76005D887B /* TravelTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5CFABC0872253EB73E7F7A /* TravelTheme.swift */; };
 		EFE8E9849129D03F63D6FB55 /* KSIAAirportLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52483DA0910210F689F70B4A /* KSIAAirportLiveActivity.swift */; };
 		F03DEEFA3F66D2D96736F90A /* ReevaluationFunctionalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2A8A4FA7DBAD4D894D4E42 /* ReevaluationFunctionalTests.swift */; };
 		F6BE0B4A2A58D647AB827D51 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E42CB2890398C3622331448 /* SettingsView.swift */; };
@@ -739,11 +746,11 @@
 		09B071F52A7318CB00F259C1 /* Array+Messaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Messaging.swift"; sourceTree = "<group>"; };
 		09F5D93F2B5CF35F00117437 /* PropositionInteraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropositionInteraction.swift; sourceTree = "<group>"; };
 		0A20A058AD70A9C7E3085CFC /* Pods-MessagingDemoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagingDemoApp.release.xcconfig"; path = "Target Support Files/Pods-MessagingDemoApp/Pods-MessagingDemoApp.release.xcconfig"; sourceTree = "<group>"; };
-		0DAFE600BE7E6E28C762499F /* KSIAAirportLiveActivityView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KSIAAirportLiveActivityView.swift; path = TestApps/MessagingDemoAppSwiftUI/AppPages/LiveActivity/Pages/KSIAAirportLiveActivityView.swift; sourceTree = "<group>"; };
+		0DAFE600BE7E6E28C762499F /* KSIAAirportLiveActivityView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = KSIAAirportLiveActivityView.swift; sourceTree = "<group>"; };
 		0EB4C861868845FFA51C3132 /* InboxEventListeningTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxEventListeningTests.swift; sourceTree = "<group>"; };
 		0F630F3E2F0ED2DE0080688A /* LiveActivityBatchTokenCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityBatchTokenCollector.swift; sourceTree = "<group>"; };
 		1331B50C344AD02FE0C9E2BF /* Pods_FunctionalTestApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FunctionalTestApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		145E8C0CC8F53B5E00EA1D50 /* FlynasFlightAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FlynasFlightAttributes.swift; path = TestApps/MessagingDemoAppSwiftUI/AppPages/LiveActivity/Attributes/FlynasFlightAttributes.swift; sourceTree = "<group>"; };
+		145E8C0CC8F53B5E00EA1D50 /* FlynasFlightAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FlynasFlightAttributes.swift; sourceTree = "<group>"; };
 		17C712A4BE9744C2B77101B3 /* AEPMessagingNotificationHelperTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AEPMessagingNotificationHelperTests.swift; sourceTree = "<group>"; };
 		1F4E259E7D8AA8C9CC161945 /* Pods-UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.debug.xcconfig"; path = "Target Support Files/Pods-UnitTests/Pods-UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		20F6C93A259B55959EF4EA0C /* Pods-E2EFunctionalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E2EFunctionalTests.release.xcconfig"; path = "Target Support Files/Pods-E2EFunctionalTests/Pods-E2EFunctionalTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -922,13 +929,13 @@
 		4CC464CD2E83B35D00217A78 /* CountingDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountingDataStore.swift; sourceTree = "<group>"; };
 		4CC464CE2E83B35D00217A78 /* TestElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestElement.swift; sourceTree = "<group>"; };
 		4CC464CF2E83B35D00217A78 /* TestMapBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMapBase.swift; sourceTree = "<group>"; };
-		51E066FE4BB8537A3C75AB19 /* EtihadPremiumLiveActivity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EtihadPremiumLiveActivity.swift; path = TestApps/WidgetMessagingDemoAppSwiftUI/LiveActivityUI/EtihadPremium/EtihadPremiumLiveActivity.swift; sourceTree = "<group>"; };
-		52483DA0910210F689F70B4A /* KSIAAirportLiveActivity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KSIAAirportLiveActivity.swift; path = TestApps/WidgetMessagingDemoAppSwiftUI/LiveActivityUI/KSIA/KSIAAirportLiveActivity.swift; sourceTree = "<group>"; };
+		51E066FE4BB8537A3C75AB19 /* EtihadPremiumLiveActivity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EtihadPremiumLiveActivity.swift; sourceTree = "<group>"; };
+		52483DA0910210F689F70B4A /* KSIAAirportLiveActivity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = KSIAAirportLiveActivity.swift; sourceTree = "<group>"; };
 		531E38A50A394377B713C9E2 /* EmptyStateSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateSettingsTests.swift; sourceTree = "<group>"; };
 		56F59E16FF701ECF14A230E6 /* NotificationServiceInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = NotificationServiceInfo.plist; sourceTree = "<group>"; };
 		57183598A5D986323D4D0B59 /* AlternateAppIcons */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; path = AlternateAppIcons; sourceTree = "<group>"; };
-		5760AF6F1BFF05AFEAF1F8E2 /* EtihadPremiumFlightAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EtihadPremiumFlightAttributes.swift; path = TestApps/MessagingDemoAppSwiftUI/AppPages/LiveActivity/Attributes/EtihadPremiumFlightAttributes.swift; sourceTree = "<group>"; };
-		618D4DF06F1B5D60B6026813 /* FlynasLiveActivityView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FlynasLiveActivityView.swift; path = TestApps/MessagingDemoAppSwiftUI/AppPages/LiveActivity/Pages/FlynasLiveActivityView.swift; sourceTree = "<group>"; };
+		5760AF6F1BFF05AFEAF1F8E2 /* EtihadPremiumFlightAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EtihadPremiumFlightAttributes.swift; sourceTree = "<group>"; };
+		618D4DF06F1B5D60B6026813 /* FlynasLiveActivityView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FlynasLiveActivityView.swift; sourceTree = "<group>"; };
 		62E308C1D0514AC89E6435D0 /* DefaultErrorViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultErrorViewTests.swift; sourceTree = "<group>"; };
 		6346827F4BC239DF7DDFD044 /* Pods-MessagingDemoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagingDemoApp.debug.xcconfig"; path = "Target Support Files/Pods-MessagingDemoApp/Pods-MessagingDemoApp.debug.xcconfig"; sourceTree = "<group>"; };
 		65ED549B7D5D4BD2B3766E46 /* InboxSchemaDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxSchemaDataTests.swift; sourceTree = "<group>"; };
@@ -969,10 +976,10 @@
 		7872C9FF7BE2CF1D18017C01 /* Pods_IntegrationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IntegrationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F70E88849D525557B4248E5 /* Pods-FunctionalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FunctionalTests.release.xcconfig"; path = "Target Support Files/Pods-FunctionalTests/Pods-FunctionalTests.release.xcconfig"; sourceTree = "<group>"; };
 		815925477A42C1BB986AD2BA /* Pods-MessagingDemoAppObjC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagingDemoAppObjC.release.xcconfig"; path = "Target Support Files/Pods-MessagingDemoAppObjC/Pods-MessagingDemoAppObjC.release.xcconfig"; sourceTree = "<group>"; };
-		83CD8FD8C205713EB5600256 /* FlynasLiveActivity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FlynasLiveActivity.swift; path = TestApps/WidgetMessagingDemoAppSwiftUI/LiveActivityUI/Flynas/FlynasLiveActivity.swift; sourceTree = "<group>"; };
+		83CD8FD8C205713EB5600256 /* FlynasLiveActivity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FlynasLiveActivity.swift; sourceTree = "<group>"; };
 		8B18970846882D9DC0CD1C50 /* Pods_E2EFunctionalTestApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_E2EFunctionalTestApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D7745B1452107BAE150E518 /* Pods-MessagingDemoAppSwiftUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagingDemoAppSwiftUI.release.xcconfig"; path = "Target Support Files/Pods-MessagingDemoAppSwiftUI/Pods-MessagingDemoAppSwiftUI.release.xcconfig"; sourceTree = "<group>"; };
-		910478188AACAB204271B79F /* EtihadBoardingLiveActivityView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EtihadBoardingLiveActivityView.swift; path = TestApps/MessagingDemoAppSwiftUI/AppPages/LiveActivity/Pages/EtihadBoardingLiveActivityView.swift; sourceTree = "<group>"; };
+		910478188AACAB204271B79F /* EtihadBoardingLiveActivityView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EtihadBoardingLiveActivityView.swift; sourceTree = "<group>"; };
 		92085982251BEB7100B9C65A /* MessagingDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MessagingDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92315434261E3B36004AE7D3 /* Messaging+PublicAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Messaging+PublicAPI.swift"; sourceTree = "<group>"; };
 		92315435261E3B36004AE7D3 /* AEPMessaging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEPMessaging.h; sourceTree = "<group>"; };
@@ -1004,16 +1011,16 @@
 		92FC594426372E34005BAE02 /* MockNotificationResponseCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNotificationResponseCoder.swift; sourceTree = "<group>"; };
 		9BDCBFF342013F2FF0CE1472 /* Pods_MessagingDemoAppObjC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MessagingDemoAppObjC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C2A8A4FA7DBAD4D894D4E42 /* ReevaluationFunctionalTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReevaluationFunctionalTests.swift; sourceTree = "<group>"; };
-		A05D1D495CAAE6850732D467 /* TravelLiveActivity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TravelLiveActivity.swift; path = TestApps/WidgetMessagingDemoAppSwiftUI/LiveActivityUI/Travel/TravelLiveActivity.swift; sourceTree = "<group>"; };
+		A05D1D495CAAE6850732D467 /* TravelLiveActivity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TravelLiveActivity.swift; sourceTree = "<group>"; };
 		A4674E5E3D4CA595638A62EB /* Pods_MessagingDemoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MessagingDemoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4E78D9F64A7EAE46F3B8CF3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		A7CA43E1EBEABAA1056A0C2D /* TravelLiveActivityAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TravelLiveActivityAttributes.swift; path = TestApps/MessagingDemoAppSwiftUI/AppPages/LiveActivity/Attributes/TravelLiveActivityAttributes.swift; sourceTree = "<group>"; };
+		A7CA43E1EBEABAA1056A0C2D /* TravelLiveActivityAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TravelLiveActivityAttributes.swift; sourceTree = "<group>"; };
 		AA000001AAAA0001000AA001 /* AEPMessagingNotification.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AEPMessagingNotification.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA000002AAAA0001000AA001 /* AEPMessagingNotification.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEPMessagingNotification.h; sourceTree = "<group>"; };
 		AA000003AAAA0001000AA001 /* MessagingNotificationHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MessagingNotificationHelper.swift; sourceTree = "<group>"; };
 		AA000004AAAA0001000AA001 /* MessagingLog.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MessagingLog.swift; sourceTree = "<group>"; };
 		AA000005AAAA0001000AA001 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B2A548464C27C249C6FB3777 /* EtihadPremiumLiveActivityView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EtihadPremiumLiveActivityView.swift; path = TestApps/MessagingDemoAppSwiftUI/AppPages/LiveActivity/Pages/EtihadPremiumLiveActivityView.swift; sourceTree = "<group>"; };
+		B2A548464C27C249C6FB3777 /* EtihadPremiumLiveActivityView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EtihadPremiumLiveActivityView.swift; sourceTree = "<group>"; };
 		B60EE0C12F0E40C30040189F /* AEPUnreadIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AEPUnreadIcon.swift; sourceTree = "<group>"; };
 		B6165DA329A67AD90031B84D /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6165DA529A67ADA0031B84D /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
@@ -1156,9 +1163,9 @@
 		BE401ECA108F4EF3ADB6F667 /* DefaultHeadingViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHeadingViewTests.swift; sourceTree = "<group>"; };
 		BF126D339E6043AF9BA26807 /* DefaultEmptyStateViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEmptyStateViewTests.swift; sourceTree = "<group>"; };
 		BF90DF53585960AE051234A9 /* Pods-IntegrationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntegrationTests.debug.xcconfig"; path = "Target Support Files/Pods-IntegrationTests/Pods-IntegrationTests.debug.xcconfig"; sourceTree = "<group>"; };
-		C19F021847D76A2B78E63FBF /* TravelLiveActivityView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TravelLiveActivityView.swift; path = TestApps/MessagingDemoAppSwiftUI/AppPages/LiveActivity/Pages/TravelLiveActivityView.swift; sourceTree = "<group>"; };
+		C19F021847D76A2B78E63FBF /* TravelLiveActivityView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TravelLiveActivityView.swift; sourceTree = "<group>"; };
 		C2ABBD2D86A79886A70B3BAD /* IconManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IconManager.swift; sourceTree = "<group>"; };
-		C5A23F8317AAEBB040AE268E /* EtihadBoardingLiveActivity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EtihadBoardingLiveActivity.swift; path = TestApps/WidgetMessagingDemoAppSwiftUI/LiveActivityUI/EtihadBoarding/EtihadBoardingLiveActivity.swift; sourceTree = "<group>"; };
+		C5A23F8317AAEBB040AE268E /* EtihadBoardingLiveActivity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EtihadBoardingLiveActivity.swift; sourceTree = "<group>"; };
 		C6F6E7A03938A7D729F1C8F1 /* BrandSplashView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BrandSplashView.swift; sourceTree = "<group>"; };
 		C7465CB5D942426740F36F97 /* Pods-MessagingDemoAppSwiftUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagingDemoAppSwiftUI.debug.xcconfig"; path = "Target Support Files/Pods-MessagingDemoAppSwiftUI/Pods-MessagingDemoAppSwiftUI.debug.xcconfig"; sourceTree = "<group>"; };
 		D4E3F2A15C6B708901234501 /* ContentCardCacheFunctionalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCardCacheFunctionalTests.swift; sourceTree = "<group>"; };
@@ -1166,14 +1173,14 @@
 		D63FC3AB2E00DAB800037B50 /* String+DataConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+DataConversion.swift"; sourceTree = "<group>"; };
 		D66DF10B2DD5327E0021AC51 /* MessagingStateManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagingStateManagerTests.swift; sourceTree = "<group>"; };
 		D66DF10D2DD5332A0021AC51 /* MockNamedKeyValueService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNamedKeyValueService.swift; sourceTree = "<group>"; };
-		D81E7F07946CF38A6D273421 /* KSIAAirportAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KSIAAirportAttributes.swift; path = TestApps/MessagingDemoAppSwiftUI/AppPages/LiveActivity/Attributes/KSIAAirportAttributes.swift; sourceTree = "<group>"; };
+		D81E7F07946CF38A6D273421 /* KSIAAirportAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = KSIAAirportAttributes.swift; sourceTree = "<group>"; };
 		DA6922BC75669B1A110C84A1 /* Pods-AEPMessaging.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AEPMessaging.debug.xcconfig"; path = "Target Support Files/Pods-AEPMessaging/Pods-AEPMessaging.debug.xcconfig"; sourceTree = "<group>"; };
 		DB1579C648A4431298A5C9EF /* UnreadIndicatorSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnreadIndicatorSettingsTests.swift; sourceTree = "<group>"; };
 		DBC56DFB8D444A25BC205CAD /* HeadingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingTests.swift; sourceTree = "<group>"; };
 		DE8F4262E345FBBC814E3294 /* MessagingRuleEngineInterceptor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MessagingRuleEngineInterceptor.swift; sourceTree = "<group>"; };
 		DE8F4262E345FBBC814E3295 /* RefreshInAppHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RefreshInAppHandler.swift; sourceTree = "<group>"; };
 		E7A2B17D34C47FB6CA55B1E9 /* Pods-MessagingDemoAppObjC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagingDemoAppObjC.debug.xcconfig"; path = "Target Support Files/Pods-MessagingDemoAppObjC/Pods-MessagingDemoAppObjC.debug.xcconfig"; sourceTree = "<group>"; };
-		ECD83A2D350B0FE2A8177D8C /* EtihadBoardingAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EtihadBoardingAttributes.swift; path = TestApps/MessagingDemoAppSwiftUI/AppPages/LiveActivity/Attributes/EtihadBoardingAttributes.swift; sourceTree = "<group>"; };
+		ECD83A2D350B0FE2A8177D8C /* EtihadBoardingAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EtihadBoardingAttributes.swift; sourceTree = "<group>"; };
 		EF179C2F973B478E3EA6F0EB /* Pods-E2EFunctionalTestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E2EFunctionalTestApp.release.xcconfig"; path = "Target Support Files/Pods-E2EFunctionalTestApp/Pods-E2EFunctionalTestApp.release.xcconfig"; sourceTree = "<group>"; };
 		F3783B7834D4427ABDFAEE02 /* DefaultLoadingViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLoadingViewTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1595,6 +1602,7 @@
 				922FFCF0251B2BBA00BCE010 /* Products */,
 				92BD7B0B251C0B7700C758CB /* Frameworks */,
 				2A4D31945863BC9FEBE21FE1 /* Pods */,
+				E8EF5E482FAA7E76005D887B /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2364,6 +2372,15 @@
 			path = EtihadBoarding;
 			sourceTree = "<group>";
 		};
+		E8EF5E482FAA7E76005D887B /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				B787D3AEC0B4FCFC639C3C59 /* TravelLogoCache.swift */,
+				2E5CFABC0872253EB73E7F7A /* TravelTheme.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		E9963A95628E035307486378 /* Flynas */ = {
 			isa = PBXGroup;
 			children = (
@@ -2735,8 +2752,8 @@
 		922FFCE7251B2BBA00BCE010 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1600;
-				LastUpgradeCheck = 1420;
+				LastSwiftUpdateCheck = 1700;
+				LastUpgradeCheck = 1700;
 				TargetAttributes = {
 					091881E32A16BAE200615481 = {
 						CreatedOnToolsVersion = 14.0;
@@ -3419,17 +3436,17 @@
 				B61BD8E62DA466F9007FE12E /* AirplaneTrackingAttributes.swift in Sources */,
 				0969D6362A760AF900A00BF7 /* CustomHtmlView.swift in Sources */,
 				091881E72A16BAE300615481 /* MessagingDemoAppSwiftUIApp.swift in Sources */,
-				C9AF8714AE3BF5785C14898C /* EtihadPremiumFlightAttributes.swift in Sources */,
+				E8EF5E412FAA7E76005D887B /* EtihadPremiumFlightAttributes.swift in Sources */,
 				94EC73CAA8156458D6E6D8E4 /* EtihadPremiumLiveActivityView.swift in Sources */,
-				93D6C091526B0DB14B4F3228 /* EtihadBoardingAttributes.swift in Sources */,
+				E8EF5E422FAA7E76005D887B /* EtihadBoardingAttributes.swift in Sources */,
 				D99551ACFA0CCD0A03EC6E65 /* EtihadBoardingLiveActivityView.swift in Sources */,
-				00CDF3D4D87662219C693956 /* KSIAAirportAttributes.swift in Sources */,
+				E8EF5E432FAA7E76005D887B /* KSIAAirportAttributes.swift in Sources */,
 				AE619CED1A055657E7500525 /* KSIAAirportLiveActivityView.swift in Sources */,
-				78FD7BC272965BF4DB6FC38C /* FlynasFlightAttributes.swift in Sources */,
+				E8EF5E442FAA7E76005D887B /* FlynasFlightAttributes.swift in Sources */,
 				2C13BE0755C549F8916762D7 /* FlynasLiveActivityView.swift in Sources */,
-				B27ABE633636E5723829A952 /* TravelLiveActivityAttributes.swift in Sources */,
-				836EB2A76866A5DD56A4C12C /* TravelLogoCache.swift in Sources */,
-				B378EBC6341FD37662CAB617 /* TravelTheme.swift in Sources */,
+				E8EF5E452FAA7E76005D887B /* TravelLiveActivityAttributes.swift in Sources */,
+				E8EF5E462FAA7E76005D887B /* TravelLogoCache.swift in Sources */,
+				E8EF5E472FAA7E76005D887B /* TravelTheme.swift in Sources */,
 				2EFB232F65D8A5892B4A0B16 /* TravelLiveActivityView.swift in Sources */,
 				20E8842AE3C1271C39F08AFC /* IconManager.swift in Sources */,
 				F6BE0B4A2A58D647AB827D51 /* SettingsView.swift in Sources */,
@@ -3801,6 +3818,13 @@
 				EFE8E9849129D03F63D6FB55 /* KSIAAirportLiveActivity.swift in Sources */,
 				C33C9363425C661D4CB058CB /* FlynasLiveActivity.swift in Sources */,
 				087093B1FFADC7F5B680F77F /* TravelLiveActivity.swift in Sources */,
+				93D6C091526B0DB14B4F3228 /* EtihadBoardingAttributes.swift in Sources */,
+				00CDF3D4D87662219C693956 /* KSIAAirportAttributes.swift in Sources */,
+				78FD7BC272965BF4DB6FC38C /* FlynasFlightAttributes.swift in Sources */,
+				C9AF8714AE3BF5785C14898C /* EtihadPremiumFlightAttributes.swift in Sources */,
+				B27ABE633636E5723829A952 /* TravelLiveActivityAttributes.swift in Sources */,
+				836EB2A76866A5DD56A4C12C /* TravelLogoCache.swift in Sources */,
+				B378EBC6341FD37662CAB617 /* TravelTheme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4034,7 +4058,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TestApps/MessagingDemoAppSwiftUI/Preview Content\"";
-				DEVELOPMENT_TEAM = FKGEE875K4;
+				DEVELOPMENT_TEAM = A35LKWB5H8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MessagingDemoAppSwiftUI-Info.plist";
@@ -4052,7 +4076,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.adobe.MessagingDemoAppSwiftUI;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.adampadobe.aep-messaging-demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -4071,7 +4095,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TestApps/MessagingDemoAppSwiftUI/Preview Content\"";
-				DEVELOPMENT_TEAM = FKGEE875K4;
+				DEVELOPMENT_TEAM = A35LKWB5H8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MessagingDemoAppSwiftUI-Info.plist";
@@ -4089,7 +4113,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.adobe.MessagingDemoAppSwiftUI;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.adampadobe.aep-messaging-demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -4103,13 +4127,13 @@
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = FKGEE875K4;
+				DEVELOPMENT_TEAM = A35LKWB5H8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TestApps/MessagingDemoAppSwiftUI/NotificationServiceInfo.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NotificationServiceSwiftUI;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.adobe.MessagingDemoAppSwiftUI.NotificationService;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.adampadobe.aep-messaging-demo.NotificationService";
 				PRODUCT_NAME = NotificationServiceSwiftUI;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -4521,6 +4545,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				INFOPLIST_FILE = AEPMessaging/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -4556,6 +4581,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				INFOPLIST_FILE = AEPMessaging/Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -4922,9 +4948,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = TestApps/WidgetMessagingDemoAppSwiftUI/WidgetMessagingDemoAppSwiftUI.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = FKGEE875K4;
+				DEVELOPMENT_TEAM = A35LKWB5H8;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -4938,8 +4965,8 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.adobe.MessagingDemoAppSwiftUI.WidgetMessagingDemoAppSwiftUI;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.adampadobe.aep-messaging-demo.WidgetMessagingDemoAppSwiftUI";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
@@ -4956,9 +4983,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = TestApps/WidgetMessagingDemoAppSwiftUI/WidgetMessagingDemoAppSwiftUI.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = FKGEE875K4;
+				DEVELOPMENT_TEAM = A35LKWB5H8;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -4972,8 +5000,8 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.adobe.MessagingDemoAppSwiftUI.WidgetMessagingDemoAppSwiftUI;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.adampadobe.aep-messaging-demo.WidgetMessagingDemoAppSwiftUI";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -5165,13 +5193,13 @@
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = FKGEE875K4;
+				DEVELOPMENT_TEAM = A35LKWB5H8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TestApps/MessagingDemoAppSwiftUI/NotificationServiceInfo.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NotificationServiceSwiftUI;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.adobe.MessagingDemoAppSwiftUI.NotificationService;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.adampadobe.aep-messaging-demo.NotificationService";
 				PRODUCT_NAME = NotificationServiceSwiftUI;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;

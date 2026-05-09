@@ -101,15 +101,17 @@ struct PushView: View {
         // Reset all identities (this will generate a new ECID)
         MobileCore.resetIdentities()
         
-        // Wait a moment for the reset to complete, then fetch new values
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+
+        // Allow Edge/Messaging to settle, then re-send the stored APNs token to Adobe (not applicable for SIM_ placeholders).
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            appDelegate?.redispatchStoredPushIdentifierToAdobeIfNeeded()
             fetchInfo()
             isResetting = false
-            
-            // Re-register for push notifications
-            if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-                appDelegate.registerForPushNotifications(UIApplication.shared)
-            }
+            appDelegate?.registerForPushNotifications(UIApplication.shared)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+            appDelegate?.redispatchStoredPushIdentifierToAdobeIfNeeded()
         }
     }
 }

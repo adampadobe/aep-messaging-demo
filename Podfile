@@ -21,8 +21,9 @@ $dev_branch = 'dev-v5.5.0'
 # SHARED POD GROUPS
 # ==================
 def lib_main
-    pod 'AEPCore'
-    pod 'AEPServices'
+    # Messaging needs Core APIs not yet on CocoaPods trunk; pin Core/Services to adobe main.
+    pod 'AEPCore', :git => 'https://github.com/adobe/aepsdk-core-ios.git', :branch => 'main'
+    pod 'AEPServices', :git => 'https://github.com/adobe/aepsdk-core-ios.git', :branch => 'main'
     pod 'AEPRulesEngine'
 end
 
@@ -37,6 +38,7 @@ def app_main
     pod 'AEPLifecycle'
     pod 'AEPSignal'
     pod 'AEPEdge'
+    pod 'AEPEdgeBridge'
     pod 'AEPEdgeIdentity'
     pod 'AEPEdgeConsent'
     pod 'AEPAssurance'
@@ -104,4 +106,16 @@ end
 target 'E2EFunctionalTestApp' do
   app_main
   test_utils
+end
+
+post_install do |installer|
+  minimum_ios = Gem::Version.new('12.0')
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      deployment = config.build_settings['IPHONEOS_DEPLOYMENT_TARGET']
+      next if deployment.nil? || deployment.empty?
+      current = Gem::Version.new(deployment)
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = [current, minimum_ios].max.to_s
+    end
+  end
 end

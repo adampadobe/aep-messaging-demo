@@ -11,8 +11,8 @@ governing permissions and limitations under the License.
 */
 
 import SwiftUI
+import UIKit
 import AEPCore
-import AEPAssurance
 
 @main
 struct MessagingDemoAppSwiftUIApp: App {
@@ -26,8 +26,8 @@ struct MessagingDemoAppSwiftUIApp: App {
         WindowGroup {
             ZStack {
                 HomeView()
-                    .onOpenURL{ url in
-                        Assurance.startSession(url: url)
+                    .onOpenURL { url in
+                        (UIApplication.shared.delegate as? AppDelegate)?.enqueueAssuranceDeepLink(url)
                     }
                 if showBrandSplash {
                     BrandSplashView(brand: iconManager.current) {

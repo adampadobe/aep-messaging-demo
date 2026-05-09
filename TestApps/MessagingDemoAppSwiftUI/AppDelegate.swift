@@ -13,6 +13,7 @@ governing permissions and limitations under the License.
 import AEPAssurance
 import AEPCore
 import AEPEdge
+import AEPEdgeBridge
 import AEPEdgeConsent
 import AEPEdgeIdentity
 import AEPLifecycle
@@ -53,6 +54,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCent
             Lifecycle.self,
             Signal.self,
             Edge.self,
+            EdgeBridge.self,     // Bridges lifecycleStart/Pause and MobileCore.track() to Edge XDM events
             Consent.self,
             Messaging.self,
             Assurance.self,

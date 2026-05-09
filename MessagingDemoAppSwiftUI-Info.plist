@@ -57,20 +57,38 @@
 				<key>UIPrerenderedIcon</key>
 				<false/>
 			</dict>
-			<key>AppIcon-Flynas</key>
+			<key>AppIcon-Claws</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>AppIcon-Flynas</string>
+					<string>AppIcon-Claws</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
 			</dict>
-			<key>AppIcon-Travel</key>
+			<key>AppIcon-NFL</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>AppIcon-Travel</string>
+					<string>AppIcon-NFL</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>AppIcon-Stormwings</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIcon-Stormwings</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>AppIcon-Hungry</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIcon-Hungry</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
@@ -104,20 +122,38 @@
 				<key>UIPrerenderedIcon</key>
 				<false/>
 			</dict>
-			<key>AppIcon-Flynas</key>
+			<key>AppIcon-Claws</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>AppIcon-Flynas</string>
+					<string>AppIcon-Claws</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
 			</dict>
-			<key>AppIcon-Travel</key>
+			<key>AppIcon-NFL</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>AppIcon-Travel</string>
+					<string>AppIcon-NFL</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>AppIcon-Stormwings</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIcon-Stormwings</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>AppIcon-Hungry</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIcon-Hungry</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
