@@ -170,11 +170,11 @@ extension Messaging {
             ]
         }
 
-        // Creating Edge event data with XDM and data payloads
+        // Creating Edge event data with data payload only (no xdm key).
+        // Matches the pattern of sendPushToken — pure data events bypass DCVS validation
+        // so liveActivityPushNotificationDetails reaches the profile flow regardless of
+        // any DCVS descriptor issues on the EE dataset.
         let eventData: [String: Any] = [
-            MessagingConstants.XDM.Key.XDM: [
-                MessagingConstants.XDM.Key.EVENT_TYPE: MessagingConstants.XDM.LiveActivity.EventType.PUSH_TO_START
-            ],
             MessagingConstants.XDM.Key.DATA: [
                 MessagingConstants.XDM.LiveActivity.PUSH_NOTIFICATION_DETAILS: detailsArray
             ]
