@@ -7,6 +7,10 @@
     "aep-xcode": {
       "command": "node",
       "args": [".mcp/server.js"]
+    },
+    "git": {
+      "command": "/Users/apalmer/.local/bin/uvx",
+      "args": ["mcp-server-git", "--repository", "/Users/apalmer/Developer/Apple_App/aepsdk-messaging-ios"]
     }
   }
 }
