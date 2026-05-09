@@ -107,7 +107,7 @@ struct SettingsView: View {
 
         // 1. Link the authenticated Email identity to this ECID
         let emailItem = IdentityItem(id: trimmed, authenticatedState: .authenticated, primary: false)
-        var map = IdentityMap()
+        let map = IdentityMap()
         map.add(item: emailItem, withNamespace: "Email")
         AEPEdgeIdentity.Identity.updateIdentities(with: map)
 
