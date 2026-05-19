@@ -3061,7 +3061,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "find \"${SRCROOT}/TestApps/MessagingDemoAppSwiftUI/AlternateAppIcons\" -name \"AppIcon-*.png\" -exec cp {} \"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\" \\;\n";
+			shellScript = "SRC=\"${SRCROOT}/TestApps/MessagingDemoAppSwiftUI/AlternateAppIcons\"\nDEST=\"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\"\n# Copy @2x and @3x to bundle root\nfind \"${SRC}\" -name \"AppIcon-*.png\" -exec cp {} \"${DEST}/\" \\;\n# Also copy @2x as base (no suffix) so iOS home-screen rendering finds @1x\nfor f in \"${SRC}\"/AppIcon-*@2x.png; do\n  base=$(basename \"$f\" \"@2x.png\")\n  cp \"$f\" \"${DEST}/${base}.png\"\ndone\n";
 			showEnvVarsInLog = 0;
 		};
 		0060B3AB55CA39C5B2D02861 /* [CP] Embed Pods Frameworks */ = {
