@@ -64,6 +64,8 @@
 		11809F1839C1AFE69C2A61CA /* Pods_MessagingDemoAppSwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233D0E8FD8252487C368E8F3 /* Pods_MessagingDemoAppSwiftUI.framework */; };
 		1949AACD944344D7BC32A19F /* InboxSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCA947D94604DCCACF943AC /* InboxSettingsTests.swift */; };
 		20E8842AE3C1271C39F08AFC /* IconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2ABBD2D86A79886A70B3BAD /* IconManager.swift */; };
+		17A0FD3C6DB648F2B2CCCE57 /* IdentityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC1AEED2D1949BE9FEAE073 /* IdentityManager.swift */; };
+		6FE53D0C90A34F7B94AD2325 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72AEDE9A611408784FAA43A /* WelcomeView.swift */; };
 		21E9FEC362EF41B9A7D57D3F /* InboxEventListeningTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB4C861868845FFA51C3132 /* InboxEventListeningTests.swift */; };
 		2313E365F83F4D96774FA00E /* Pods_MessagingDemoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4674E5E3D4CA595638A62EB /* Pods_MessagingDemoApp.framework */; };
 		2402745C29FC424000884DFE /* TestableMessagingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2402745B29FC424000884DFE /* TestableMessagingDelegate.swift */; };
@@ -1165,6 +1167,8 @@
 		BF90DF53585960AE051234A9 /* Pods-IntegrationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntegrationTests.debug.xcconfig"; path = "Target Support Files/Pods-IntegrationTests/Pods-IntegrationTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C19F021847D76A2B78E63FBF /* TravelLiveActivityView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TravelLiveActivityView.swift; sourceTree = "<group>"; };
 		C2ABBD2D86A79886A70B3BAD /* IconManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IconManager.swift; sourceTree = "<group>"; };
+		DFC1AEED2D1949BE9FEAE073 /* IdentityManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IdentityManager.swift; sourceTree = "<group>"; };
+		D72AEDE9A611408784FAA43A /* WelcomeView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		C5A23F8317AAEBB040AE268E /* EtihadBoardingLiveActivity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EtihadBoardingLiveActivity.swift; sourceTree = "<group>"; };
 		C6F6E7A03938A7D729F1C8F1 /* BrandSplashView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BrandSplashView.swift; sourceTree = "<group>"; };
 		C7465CB5D942426740F36F97 /* Pods-MessagingDemoAppSwiftUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagingDemoAppSwiftUI.debug.xcconfig"; path = "Target Support Files/Pods-MessagingDemoAppSwiftUI/Pods-MessagingDemoAppSwiftUI.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1329,6 +1333,7 @@
 			isa = PBXGroup;
 			children = (
 				C2ABBD2D86A79886A70B3BAD /* IconManager.swift */,
+				DFC1AEED2D1949BE9FEAE073 /* IdentityManager.swift */,
 				3E42CB2890398C3622331448 /* SettingsView.swift */,
 				C6F6E7A03938A7D729F1C8F1 /* BrandSplashView.swift */,
 			);
@@ -2326,6 +2331,7 @@
 				B61BD8D62DA466BB007FE12E /* LiveActivity */,
 				B6F7CC922CC80DE500C35C64 /* ElementViews */,
 				091881E82A16BAE300615481 /* HomeView.swift */,
+				D72AEDE9A611408784FAA43A /* WelcomeView.swift */,
 				091881FE2A16D7A200615481 /* PushView.swift */,
 				091881F22A16C2A200615481 /* InAppView.swift */,
 				B6D02CF82F67ECA300D65C16 /* InboxView.swift */,
@@ -3418,6 +3424,7 @@
 				B6F7CC992CC874E900C35C64 /* TabHeader.swift in Sources */,
 				0969D6342A75D55E00A00BF7 /* CustomImageView.swift in Sources */,
 				091881E92A16BAE300615481 /* HomeView.swift in Sources */,
+				6FE53D0C90A34F7B94AD2325 /* WelcomeView.swift in Sources */,
 				B6F7CC972CC873AB00C35C64 /* AppDelegate.swift in Sources */,
 				092A77F22A757CB40026D325 /* CodeBasedView.swift in Sources */,
 				B61BD9172DA4A779007FE12E /* LiveActivityView.swift in Sources */,
@@ -3449,6 +3456,7 @@
 				E8EF5E472FAA7E76005D887B /* TravelTheme.swift in Sources */,
 				2EFB232F65D8A5892B4A0B16 /* TravelLiveActivityView.swift in Sources */,
 				20E8842AE3C1271C39F08AFC /* IconManager.swift in Sources */,
+				17A0FD3C6DB648F2B2CCCE57 /* IdentityManager.swift in Sources */,
 				F6BE0B4A2A58D647AB827D51 /* SettingsView.swift in Sources */,
 				418AECF9E7821B215041459C /* BrandSplashView.swift in Sources */,
 			);
