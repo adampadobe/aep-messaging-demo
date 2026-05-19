@@ -10,30 +10,23 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import AEPCore
-import AEPEdge
-import AEPEdgeIdentity
 import SwiftUI
 import UIKit
 
 /// Settings tab. Brand icon picker + user identity login/logout.
 struct SettingsView: View {
 
-    @StateObject private var iconManager = IconManager.shared
+    @EnvironmentObject private var identityManager: IdentityManager
+    @StateObject        private var iconManager     = IconManager.shared
 
-    // MARK: - Identity state
     @State private var emailInput: String = ""
-    @State private var loggedInEmail: String? = {
-        let stored = UserDefaults.standard.string(forKey: "loggedInEmail") ?? ""
-        return stored.isEmpty ? nil : stored
-    }()
 
     var body: some View {
         NavigationView {
             Form {
                 // ── User Identity ──────────────────────────────────────────
                 Section {
-                    if let email = loggedInEmail {
+                    if let email = identityManager.loggedInEmail {
                         HStack {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(email)
@@ -44,7 +37,7 @@ struct SettingsView: View {
                             }
                             Spacer()
                             Button("Log Out", role: .destructive) {
-                                logOut(email: email)
+                                identityManager.logOut()
                             }
                         }
                     } else {
@@ -53,14 +46,15 @@ struct SettingsView: View {
                             .autocorrectionDisabled()
                             .textInputAutocapitalization(.never)
                         Button("Log In") {
-                            logIn(email: emailInput)
+                            identityManager.logIn(email: emailInput, brand: iconManager.current)
+                            emailInput = ""
                         }
                         .disabled(emailInput.trimmingCharacters(in: .whitespaces).isEmpty)
                     }
                 } header: {
                     Text("User Identity")
                 } footer: {
-                    Text("Login sends a user.login Edge event and updates the authenticated Email identity in AEP, linking this ECID to a known profile.")
+                    Text("Login sends a brand-specific identity stitch Edge event, linking this ECID to the authenticated Email identity in AEP.")
                 }
 
                 // ── App Icon ───────────────────────────────────────────────
@@ -99,47 +93,6 @@ struct SettingsView: View {
         .navigationViewStyle(.stack)
     }
 
-    // MARK: - Identity helpers
-
-    private func logIn(email: String) {
-        let trimmed = email.trimmingCharacters(in: .whitespaces)
-        guard !trimmed.isEmpty else { return }
-
-        // 1. Link the authenticated Email identity to this ECID
-        let emailItem = IdentityItem(id: trimmed, authenticatedState: .authenticated, primary: false)
-        let map = IdentityMap()
-        map.add(item: emailItem, withNamespace: "Email")
-        AEPEdgeIdentity.Identity.updateIdentities(with: map)
-
-        // 2. Fire a user.login Edge XDM event (shows up cleanly in the AEP profile)
-        let xdm: [String: Any] = ["eventType": "user.login"]
-        Edge.sendEvent(experienceEvent: ExperienceEvent(xdm: xdm))
-
-        // 3. Track via EdgeBridge so it also lands in Analytics
-        MobileCore.track(action: "login", data: ["email": trimmed])
-
-        // 4. Persist and update UI
-        UserDefaults.standard.set(trimmed, forKey: "loggedInEmail")
-        loggedInEmail = trimmed
-        emailInput = ""
-    }
-
-    private func logOut(email: String) {
-        // 1. Remove the authenticated Email identity
-        let emailItem = IdentityItem(id: email, authenticatedState: .authenticated, primary: false)
-        AEPEdgeIdentity.Identity.removeIdentity(item: emailItem, withNamespace: "Email")
-
-        // 2. Fire a user.logout Edge XDM event
-        let xdm: [String: Any] = ["eventType": "user.logout"]
-        Edge.sendEvent(experienceEvent: ExperienceEvent(xdm: xdm))
-
-        // 3. Track via EdgeBridge
-        MobileCore.track(action: "logout", data: nil)
-
-        // 4. Clear state
-        UserDefaults.standard.removeObject(forKey: "loggedInEmail")
-        loggedInEmail = nil
-    }
 }
 
 private struct BrandRow: View {
