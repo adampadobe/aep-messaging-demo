@@ -186,6 +186,7 @@ struct BrandIconThumbnail: View {
         case .nfl:        return Color(red: 0.65, green: 0.12, blue: 0.10)  // NFL red
         case .stormwings: return Color(red: 0.10, green: 0.10, blue: 0.10)  // Stormwings dark
         case .hungry:     return Color(red: 0.96, green: 0.75, blue: 0.04)  // Hungry yellow
+        case .premierInn: return Color(red: 0.29, green: 0.12, blue: 0.51)  // Premier Inn purple
         }
     }
 }

@@ -34,6 +34,8 @@ enum BrandIcon: String, CaseIterable, Identifiable, Hashable {
     case stormwings
     // Food & retail
     case hungry
+    // Hospitality
+    case premierInn
 
     var id: String { rawValue }
 
@@ -49,6 +51,7 @@ enum BrandIcon: String, CaseIterable, Identifiable, Hashable {
         case .nfl:        return "AppIcon-NFL"
         case .stormwings: return "AppIcon-Stormwings"
         case .hungry:     return "AppIcon-Hungry"
+        case .premierInn: return "AppIcon-PremierInn"
         }
     }
 
@@ -67,6 +70,7 @@ enum BrandIcon: String, CaseIterable, Identifiable, Hashable {
         case .nfl:        return "NFL"
         case .stormwings: return "Stormwings Eagles"
         case .hungry:     return "Hungry"
+        case .premierInn: return "Premier Inn"
         }
     }
 
@@ -82,6 +86,7 @@ enum BrandIcon: String, CaseIterable, Identifiable, Hashable {
         case .nfl:        return "nfl.identity.stitch"
         case .stormwings: return "stormwings.identity.stitch"
         case .hungry:     return "hungry.identity.stitch"
+        case .premierInn: return "premierInn.identity.stitch"
         }
     }
 
@@ -94,7 +99,8 @@ enum BrandIcon: String, CaseIterable, Identifiable, Hashable {
         case .claws:      return Color(red: 0.18, green: 0.16, blue: 0.42)
         case .nfl:        return Color(red: 0.65, green: 0.12, blue: 0.10)
         case .stormwings: return Color(red: 0.10, green: 0.10, blue: 0.10)
-        case .hungry:     return Color(red: 0.96, green: 0.75, blue: 0.04)
+        case .hungry:     return Color(red: 0.96, green: 0.75, blue: 0.04)  // Hungry yellow
+        case .premierInn: return Color(red: 0.29, green: 0.12, blue: 0.51)  // Premier Inn purple #4B1F83
         }
     }
 }
