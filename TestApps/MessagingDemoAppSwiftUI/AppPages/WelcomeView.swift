@@ -22,6 +22,7 @@ struct WelcomeView: View {
 
     @EnvironmentObject private var identityManager: IdentityManager
     @StateObject          private var iconManager   = IconManager.shared
+    @Environment(\.dismiss) private var dismiss
 
     @State private var showEmailSheet = false
     @State private var isCreateMode   = true
@@ -45,6 +46,7 @@ struct WelcomeView: View {
             // Close button — skip auth, enter anonymous/guest mode
             Button {
                 identityManager.continueAsGuest()
+                dismiss()
             } label: {
                 Image(systemName: "xmark")
                     .font(.system(size: 14, weight: .semibold))
@@ -61,6 +63,10 @@ struct WelcomeView: View {
                 identityManager.logIn(email: email, brand: brand)
             }
             .environmentObject(identityManager)
+        }
+        // Auto-dismiss when presented as a sheet from SettingsView and login succeeds
+        .onChange(of: identityManager.loggedInEmail) { email in
+            if email != nil { dismiss() }
         }
     }
 

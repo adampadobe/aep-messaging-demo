@@ -20,6 +20,7 @@ struct SettingsView: View {
     @StateObject        private var iconManager     = IconManager.shared
 
     @State private var emailInput: String = ""
+    @State private var showWelcome: Bool  = false
 
     var body: some View {
         NavigationView {
@@ -41,15 +42,11 @@ struct SettingsView: View {
                             }
                         }
                     } else {
-                        TextField("Email address", text: $emailInput)
-                            .keyboardType(.emailAddress)
-                            .autocorrectionDisabled()
-                            .textInputAutocapitalization(.never)
-                        Button("Log In") {
-                            identityManager.logIn(email: emailInput, brand: iconManager.current)
-                            emailInput = ""
+                        Button {
+                            showWelcome = true
+                        } label: {
+                            Label("Sign In / Create Account", systemImage: "person.crop.circle.badge.plus")
                         }
-                        .disabled(emailInput.trimmingCharacters(in: .whitespaces).isEmpty)
                     }
                 } header: {
                     Text("User Identity")
@@ -91,6 +88,10 @@ struct SettingsView: View {
             .navigationTitle("Settings")
         }
         .navigationViewStyle(.stack)
+        .fullScreenCover(isPresented: $showWelcome) {
+            WelcomeView()
+                .environmentObject(identityManager)
+        }
     }
 
 }
