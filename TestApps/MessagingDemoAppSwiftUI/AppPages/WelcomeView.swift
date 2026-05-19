@@ -31,7 +31,7 @@ struct WelcomeView: View {
     // MARK: - Body
 
     var body: some View {
-        ZStack {
+        ZStack(alignment: .topTrailing) {
             background
             VStack(spacing: 0) {
                 Spacer()
@@ -41,6 +41,20 @@ struct WelcomeView: View {
                 ctaStack
                 Spacer().frame(height: 52)
             }
+
+            // Close button — skip auth, enter anonymous/guest mode
+            Button {
+                identityManager.continueAsGuest()
+            } label: {
+                Image(systemName: "xmark")
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundColor(.white.opacity(0.8))
+                    .padding(10)
+                    .background(.white.opacity(0.15))
+                    .clipShape(Circle())
+            }
+            .padding(.top, 56)
+            .padding(.trailing, 24)
         }
         .sheet(isPresented: $showEmailSheet) {
             EmailLoginSheet(isCreateMode: isCreateMode, brand: brand) { email in
