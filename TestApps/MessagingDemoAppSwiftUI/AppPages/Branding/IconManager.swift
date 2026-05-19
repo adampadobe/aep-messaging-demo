@@ -13,6 +13,7 @@ governing permissions and limitations under the License.
 import SwiftUI
 import UIKit
 
+
 /// One brand the presenter can swap to at runtime. To add a new brand:
 ///   1. Add a case here.
 ///   2. Provide `iconName` (must match the key under
@@ -66,6 +67,34 @@ enum BrandIcon: String, CaseIterable, Identifiable, Hashable {
         case .nfl:        return "NFL"
         case .stormwings: return "Stormwings Eagles"
         case .hungry:     return "Hungry"
+        }
+    }
+
+    /// Edge XDM `eventType` sent when stitching this brand's identity.
+    /// Matches the equivalent event type used in the web demo for the same brand,
+    /// so AJO journeys triggered by the web lab also fire for mobile logins.
+    var stitchEventType: String {
+        switch self {
+        case .default:    return "mobileapp.identity.stitch"
+        case .etihad:     return "etihadAirline.identity.stitch"
+        case .ksia:       return "ksia.identity.stitch"
+        case .claws:      return "clawsAndOrder.identity.stitch"
+        case .nfl:        return "nfl.identity.stitch"
+        case .stormwings: return "stormwings.identity.stitch"
+        case .hungry:     return "hungry.identity.stitch"
+        }
+    }
+
+    /// Brand accent colour used in WelcomeView backgrounds and tints.
+    var brandColor: Color {
+        switch self {
+        case .default:    return Color(red: 0.93, green: 0.0,  blue: 0.0)
+        case .etihad:     return Color(red: 0.78, green: 0.55, blue: 0.20)
+        case .ksia:       return Color(red: 0.05, green: 0.32, blue: 0.20)
+        case .claws:      return Color(red: 0.18, green: 0.16, blue: 0.42)
+        case .nfl:        return Color(red: 0.65, green: 0.12, blue: 0.10)
+        case .stormwings: return Color(red: 0.10, green: 0.10, blue: 0.10)
+        case .hungry:     return Color(red: 0.96, green: 0.75, blue: 0.04)
         }
     }
 }
