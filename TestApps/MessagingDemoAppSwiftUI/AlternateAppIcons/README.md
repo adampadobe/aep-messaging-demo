@@ -18,6 +18,7 @@ bundled**, no Xcode editing required.
 | NFL              | Sports        | `AppIcon-NFL@2x.png`       | `AppIcon-NFL@3x.png`       |
 | Stormwings Eagles| Sports        | `AppIcon-Stormwings@2x.png`| `AppIcon-Stormwings@3x.png`|
 | Hungry           | Food/Retail   | `AppIcon-Hungry@2x.png`    | `AppIcon-Hungry@3x.png`    |
+| Premier Inn      | Hospitality   | `AppIcon-PremierInn@2x.png`| `AppIcon-PremierInn@3x.png`|
 
 ## Image rules
 
