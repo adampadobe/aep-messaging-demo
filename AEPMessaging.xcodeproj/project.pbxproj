@@ -2444,6 +2444,7 @@
 				091881E02A16BAE200615481 /* Sources */,
 				091881E12A16BAE200615481 /* Frameworks */,
 				091881E22A16BAE200615481 /* Resources */,
+				ACE3F0A12C539BA4DE00BE99 /* Copy Alternate Icons to Bundle Root */,
 				091881FD2A16D15100615481 /* Embed Frameworks */,
 				B61BD8BE2DA4656B007FE12E /* Embed Foundation Extensions */,
 				BD7AFF18B6781ECE2F9F9355 /* [CP] Embed Pods Frameworks */,
@@ -3043,6 +3044,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		ACE3F0A12C539BA4DE00BE99 /* Copy Alternate Icons to Bundle Root */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Alternate Icons to Bundle Root";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "find \"${SRCROOT}/TestApps/MessagingDemoAppSwiftUI/AlternateAppIcons\" -name \"AppIcon-*.png\" -exec cp {} \"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\" \\;\n";
+			showEnvVarsInLog = 0;
+		};
 		0060B3AB55CA39C5B2D02861 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
