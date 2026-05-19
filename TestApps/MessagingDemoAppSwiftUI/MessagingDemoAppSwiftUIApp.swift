@@ -19,16 +19,31 @@ struct MessagingDemoAppSwiftUIApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @Environment(\.scenePhase) private var scenePhase
 
-    @StateObject private var iconManager = IconManager.shared
-    @State private var showBrandSplash: Bool = true
+    @StateObject private var iconManager      = IconManager.shared
+    @StateObject private var identityManager  = IdentityManager.shared
+    @State private var showBrandSplash: Bool  = true
 
     var body: some Scene {
         WindowGroup {
             ZStack {
-                HomeView()
-                    .onOpenURL { url in
-                        (UIApplication.shared.delegate as? AppDelegate)?.enqueueAssuranceDeepLink(url)
-                    }
+                // Root navigation gate: show WelcomeView until the user logs in
+                // or taps "Continue as guest", then switch to the main tab bar.
+                if identityManager.isWelcomeComplete {
+                    HomeView()
+                        .environmentObject(identityManager)
+                        .onOpenURL { url in
+                            (UIApplication.shared.delegate as? AppDelegate)?.enqueueAssuranceDeepLink(url)
+                        }
+                } else {
+                    WelcomeView()
+                        .environmentObject(identityManager)
+                        .transition(.asymmetric(
+                            insertion: .opacity,
+                            removal: .move(edge: .leading).combined(with: .opacity)
+                        ))
+                }
+
+                // Brand splash overlay — always on top for the first ~1.2s.
                 if showBrandSplash {
                     BrandSplashView(brand: iconManager.current) {
                         showBrandSplash = false
@@ -37,6 +52,7 @@ struct MessagingDemoAppSwiftUIApp: App {
                     .zIndex(1)
                 }
             }
+            .animation(.easeInOut(duration: 0.4), value: identityManager.isWelcomeComplete)
         }
         .onChange(of: scenePhase) { phase in
             switch phase {
