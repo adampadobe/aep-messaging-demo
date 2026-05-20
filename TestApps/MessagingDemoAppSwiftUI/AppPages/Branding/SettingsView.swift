@@ -20,6 +20,7 @@ struct SettingsView: View {
     @StateObject        private var iconManager     = IconManager.shared
 
     @State private var emailInput: String = ""
+    @State private var showWelcome: Bool  = false
 
     var body: some View {
         NavigationView {
@@ -41,15 +42,11 @@ struct SettingsView: View {
                             }
                         }
                     } else {
-                        TextField("Email address", text: $emailInput)
-                            .keyboardType(.emailAddress)
-                            .autocorrectionDisabled()
-                            .textInputAutocapitalization(.never)
-                        Button("Log In") {
-                            identityManager.logIn(email: emailInput, brand: iconManager.current)
-                            emailInput = ""
+                        Button {
+                            showWelcome = true
+                        } label: {
+                            Label("Sign In / Create Account", systemImage: "person.crop.circle.badge.plus")
                         }
-                        .disabled(emailInput.trimmingCharacters(in: .whitespaces).isEmpty)
                     }
                 } header: {
                     Text("User Identity")
@@ -85,12 +82,20 @@ struct SettingsView: View {
                         Text("iOS shows a one-time confirmation alert the first time the icon changes.")
                             .font(.caption2)
                             .foregroundColor(.secondary)
+                        // Debug info — remove once icon switching is verified
+                        Text("Debug: scale=\(UIScreen.main.scale, specifier: "%.0f")x  supports=\(iconManager.supportsAlternateIcons ? "yes" : "no")  current=\(iconManager.current.rawValue)")
+                            .font(.caption2)
+                            .foregroundColor(.secondary)
                     }
                 }
             }
             .navigationTitle("Settings")
         }
         .navigationViewStyle(.stack)
+        .fullScreenCover(isPresented: $showWelcome) {
+            WelcomeView()
+                .environmentObject(identityManager)
+        }
     }
 
 }
@@ -185,6 +190,7 @@ struct BrandIconThumbnail: View {
         case .nfl:        return Color(red: 0.65, green: 0.12, blue: 0.10)  // NFL red
         case .stormwings: return Color(red: 0.10, green: 0.10, blue: 0.10)  // Stormwings dark
         case .hungry:     return Color(red: 0.96, green: 0.75, blue: 0.04)  // Hungry yellow
+        case .premierInn: return Color(red: 0.29, green: 0.12, blue: 0.51)  // Premier Inn purple
         }
     }
 }

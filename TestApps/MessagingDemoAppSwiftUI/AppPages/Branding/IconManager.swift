@@ -34,6 +34,8 @@ enum BrandIcon: String, CaseIterable, Identifiable, Hashable {
     case stormwings
     // Food & retail
     case hungry
+    // Hospitality
+    case premierInn
 
     var id: String { rawValue }
 
@@ -49,6 +51,7 @@ enum BrandIcon: String, CaseIterable, Identifiable, Hashable {
         case .nfl:        return "AppIcon-NFL"
         case .stormwings: return "AppIcon-Stormwings"
         case .hungry:     return "AppIcon-Hungry"
+        case .premierInn: return "AppIcon-PremierInn"
         }
     }
 
@@ -67,23 +70,14 @@ enum BrandIcon: String, CaseIterable, Identifiable, Hashable {
         case .nfl:        return "NFL"
         case .stormwings: return "Stormwings Eagles"
         case .hungry:     return "Hungry"
+        case .premierInn: return "Premier Inn"
         }
     }
 
-    /// Edge XDM `eventType` sent when stitching this brand's identity.
-    /// Matches the equivalent event type used in the web demo for the same brand,
-    /// so AJO journeys triggered by the web lab also fire for mobile logins.
-    var stitchEventType: String {
-        switch self {
-        case .default:    return "mobileapp.identity.stitch"
-        case .etihad:     return "etihadAirline.identity.stitch"
-        case .ksia:       return "ksia.identity.stitch"
-        case .claws:      return "clawsAndOrder.identity.stitch"
-        case .nfl:        return "nfl.identity.stitch"
-        case .stormwings: return "stormwings.identity.stitch"
-        case .hungry:     return "hungry.identity.stitch"
-        }
-    }
+    /// Edge XDM `eventType` sent on login — standard `application.login` for all brands
+    /// so AJO journeys can listen for a single event type. Channel (`mobile`) and
+    /// brand are carried as separate XDM fields rather than encoded in the event type.
+    var stitchEventType: String { "application.login" }
 
     /// Brand accent colour used in WelcomeView backgrounds and tints.
     var brandColor: Color {
@@ -94,7 +88,8 @@ enum BrandIcon: String, CaseIterable, Identifiable, Hashable {
         case .claws:      return Color(red: 0.18, green: 0.16, blue: 0.42)
         case .nfl:        return Color(red: 0.65, green: 0.12, blue: 0.10)
         case .stormwings: return Color(red: 0.10, green: 0.10, blue: 0.10)
-        case .hungry:     return Color(red: 0.96, green: 0.75, blue: 0.04)
+        case .hungry:     return Color(red: 0.96, green: 0.75, blue: 0.04)  // Hungry yellow
+        case .premierInn: return Color(red: 0.29, green: 0.12, blue: 0.51)  // Premier Inn purple #4B1F83
         }
     }
 }
@@ -154,14 +149,19 @@ final class IconManager: ObservableObject {
 
         isSwapping = true
         let target = brand.iconName
+        let scale = UIScreen.main.scale
+        NSLog("[IconManager] Switching to \(brand.rawValue) iconName=\(target ?? "nil") scale=\(scale)x supports=\(supportsAlternateIcons)")
         UIApplication.shared.setAlternateIconName(target) { [weak self] error in
             DispatchQueue.main.async {
                 guard let self = self else { return }
                 self.isSwapping = false
                 if let error = error {
-                    self.lastError = "Couldn't swap icon: \(error.localizedDescription)"
+                    let msg = "Couldn't swap icon: \(error.localizedDescription) (code \((error as NSError).code))"
+                    NSLog("[IconManager] ERROR: \(msg)")
+                    self.lastError = msg
                     return
                 }
+                NSLog("[IconManager] Success — icon changed to \(brand.rawValue)")
                 self.lastError = nil
                 self.current = brand
                 UserDefaults.standard.set(brand.rawValue, forKey: Self.storageKey)

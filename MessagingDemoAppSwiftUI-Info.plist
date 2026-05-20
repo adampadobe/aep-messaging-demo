@@ -44,6 +44,8 @@
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIcon-Etihad</string>
+					<string>AppIcon-Etihad@2x</string>
+					<string>AppIcon-Etihad@3x</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
@@ -53,6 +55,8 @@
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIcon-KSIA</string>
+					<string>AppIcon-KSIA@2x</string>
+					<string>AppIcon-KSIA@3x</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
@@ -62,6 +66,8 @@
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIcon-Claws</string>
+					<string>AppIcon-Claws@2x</string>
+					<string>AppIcon-Claws@3x</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
@@ -71,6 +77,8 @@
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIcon-NFL</string>
+					<string>AppIcon-NFL@2x</string>
+					<string>AppIcon-NFL@3x</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
@@ -80,6 +88,8 @@
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIcon-Stormwings</string>
+					<string>AppIcon-Stormwings@2x</string>
+					<string>AppIcon-Stormwings@3x</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
@@ -89,6 +99,19 @@
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIcon-Hungry</string>
+					<string>AppIcon-Hungry@2x</string>
+					<string>AppIcon-Hungry@3x</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>AppIcon-PremierInn</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIcon-PremierInn</string>
+					<string>AppIcon-PremierInn@2x</string>
+					<string>AppIcon-PremierInn@3x</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
@@ -109,6 +132,8 @@
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIcon-Etihad</string>
+					<string>AppIcon-Etihad@2x</string>
+					<string>AppIcon-Etihad@3x</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
@@ -118,6 +143,8 @@
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIcon-KSIA</string>
+					<string>AppIcon-KSIA@2x</string>
+					<string>AppIcon-KSIA@3x</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
@@ -127,6 +154,8 @@
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIcon-Claws</string>
+					<string>AppIcon-Claws@2x</string>
+					<string>AppIcon-Claws@3x</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
@@ -136,6 +165,8 @@
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIcon-NFL</string>
+					<string>AppIcon-NFL@2x</string>
+					<string>AppIcon-NFL@3x</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
@@ -145,6 +176,8 @@
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIcon-Stormwings</string>
+					<string>AppIcon-Stormwings@2x</string>
+					<string>AppIcon-Stormwings@3x</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
@@ -154,6 +187,19 @@
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>AppIcon-Hungry</string>
+					<string>AppIcon-Hungry@2x</string>
+					<string>AppIcon-Hungry@3x</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>AppIcon-PremierInn</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIcon-PremierInn</string>
+					<string>AppIcon-PremierInn@2x</string>
+					<string>AppIcon-PremierInn@3x</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<false/>
