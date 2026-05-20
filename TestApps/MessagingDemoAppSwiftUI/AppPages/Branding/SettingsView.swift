@@ -82,6 +82,10 @@ struct SettingsView: View {
                         Text("iOS shows a one-time confirmation alert the first time the icon changes.")
                             .font(.caption2)
                             .foregroundColor(.secondary)
+                        // Debug info — remove once icon switching is verified
+                        Text("Debug: scale=\(UIScreen.main.scale, specifier: "%.0f")x  supports=\(iconManager.supportsAlternateIcons ? "yes" : "no")  current=\(iconManager.current.rawValue)")
+                            .font(.caption2)
+                            .foregroundColor(.secondary)
                     }
                 }
             }

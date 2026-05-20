@@ -46,6 +46,14 @@ struct HomeView: View {
                         Label("Live Activity", systemImage: "app.badge")
                     }
             }
+            ProfileView()
+                .tabItem {
+                    Label("Profile", systemImage: "person.crop.circle.fill")
+                }
+            AssuranceView()
+                .tabItem {
+                    Label("Assurance", systemImage: "ant.fill")
+                }
             HotelWifiView()
                 .tabItem {
                     Label("WiFi Login", systemImage: "wifi")

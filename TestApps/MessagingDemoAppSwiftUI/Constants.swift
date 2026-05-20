@@ -25,12 +25,9 @@ enum Constants {
     // "3149c49c3910/b6541e5e6301/launch-f7ac0a320fb3-development"
     
     static let isStage = false
-    // To auto-connect on launch, paste the full deep link with a real session UUID from Assurance
-    // (https://experience.adobe.com/assurance → Create Session → connect app). Leave the placeholder below to
-    // connect via QR / deep link only; the app will not call `Assurance.startSession` until `experienceCloud.org`
-    // is available from Launch / Edge config.
-    // Example with a real id: "messagingdemo://?adb_validation_sessionid=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-    static let assuranceURL = "messagingdemo://?adb_validation_sessionid=eb0716b2-1c4d-4829-9316-3899914dbe1c"
+    // Auto-connect is disabled — use the Assurance tab in the app to paste a session URL and connect manually.
+    // The AssuranceView persists the last-used URL in UserDefaults so you don't have to retype it each session.
+    static let assuranceURL = ""
     
     // Surface Names (must match Adobe Journey Optimizer channel / code-based experience paths)
     enum SurfaceName {

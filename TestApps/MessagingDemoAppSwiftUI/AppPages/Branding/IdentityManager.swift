@@ -76,7 +76,19 @@ final class IdentityManager: ObservableObject {
         AEPEdgeIdentity.Identity.getIdentities { [weak self] identityMap, _ in
             let ecid = identityMap?.getItems(withNamespace: "ECID")?.first?.id
 
-            var xdm: [String: Any] = ["eventType": brand.stitchEventType]
+            var xdm: [String: Any] = [
+                "eventType": brand.stitchEventType,
+                // Explicit mobile channel so the web events table shows "mobile" source.
+                "channel": [
+                    "_id": "https://ns.adobe.com/xdm/channels/mobile",
+                    "typeAtSource": "mobile"
+                ],
+                // Brand carried as application context rather than encoded in the event type.
+                "application": [
+                    "name": "AEP Messaging Demo",
+                    "id":   brand.rawValue
+                ]
+            ]
             if let ecid = ecid {
                 xdm["identityMap"] = [
                     "ECID":  [["id": ecid,    "authenticatedState": "authenticated", "primary": true]],
